@@ -3,27 +3,31 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		2E313CBB24C3797900E2674C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E313CBA24C3797900E2674C /* AppDelegate.swift */; };
 		2E313CBD24C3797900E2674C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E313CBC24C3797900E2674C /* SceneDelegate.swift */; };
-		2E313CBF24C3797900E2674C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E313CBE24C3797900E2674C /* ViewController.swift */; };
-		2E313CC224C3797A00E2674C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E313CC024C3797A00E2674C /* Main.storyboard */; };
+		2E313CBF24C3797900E2674C /* CalendarDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E313CBE24C3797900E2674C /* CalendarDisplay.swift */; };
 		2E313CC424C3797B00E2674C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E313CC324C3797B00E2674C /* Assets.xcassets */; };
 		2E313CC724C3797B00E2674C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E313CC524C3797B00E2674C /* LaunchScreen.storyboard */; };
+		2ED95C9224C767ED003C598B /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED95C9124C767ED003C598B /* CalendarViewController.swift */; };
+		DED73D9E5424489CBAF2228A /* Pods_Resonance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34F246A69B4CE65E4CD909F2 /* Pods_Resonance.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2E313CB724C3797900E2674C /* Resonance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Resonance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E313CBA24C3797900E2674C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2E313CBC24C3797900E2674C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		2E313CBE24C3797900E2674C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		2E313CC124C3797A00E2674C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2E313CBE24C3797900E2674C /* CalendarDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDisplay.swift; sourceTree = "<group>"; };
 		2E313CC324C3797B00E2674C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2E313CC624C3797B00E2674C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2E313CC824C3797B00E2674C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2ED95C9124C767ED003C598B /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		34F246A69B4CE65E4CD909F2 /* Pods_Resonance.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Resonance.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		61EEE58F8E7CB0E3E7391A09 /* Pods-Resonance.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Resonance.debug.xcconfig"; path = "Target Support Files/Pods-Resonance/Pods-Resonance.debug.xcconfig"; sourceTree = "<group>"; };
+		D00EE6F0689FE7C7A6C0380E /* Pods-Resonance.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Resonance.release.xcconfig"; path = "Target Support Files/Pods-Resonance/Pods-Resonance.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +35,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DED73D9E5424489CBAF2228A /* Pods_Resonance.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2646B7004A95EF32F042EBA4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				34F246A69B4CE65E4CD909F2 /* Pods_Resonance.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		2E313CAE24C3797900E2674C = {
 			isa = PBXGroup;
 			children = (
 				2E313CB924C3797900E2674C /* Resonance */,
 				2E313CB824C3797900E2674C /* Products */,
+				42638222F716B52C5B5E2EB9 /* Pods */,
+				2646B7004A95EF32F042EBA4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +71,48 @@
 		2E313CB924C3797900E2674C /* Resonance */ = {
 			isa = PBXGroup;
 			children = (
+				2E313CCE24C37E1F00E2674C /* Model */,
+				2E313CCF24C37E2600E2674C /* View */,
+				2E313CD024C37E2E00E2674C /* Controller */,
+				2E313CBE24C3797900E2674C /* CalendarDisplay.swift */,
+				2ED95C9124C767ED003C598B /* CalendarViewController.swift */,
 				2E313CBA24C3797900E2674C /* AppDelegate.swift */,
 				2E313CBC24C3797900E2674C /* SceneDelegate.swift */,
-				2E313CBE24C3797900E2674C /* ViewController.swift */,
-				2E313CC024C3797A00E2674C /* Main.storyboard */,
 				2E313CC324C3797B00E2674C /* Assets.xcassets */,
 				2E313CC524C3797B00E2674C /* LaunchScreen.storyboard */,
 				2E313CC824C3797B00E2674C /* Info.plist */,
 			);
 			path = Resonance;
+			sourceTree = "<group>";
+		};
+		2E313CCE24C37E1F00E2674C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2E313CCF24C37E2600E2674C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2E313CD024C37E2E00E2674C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		42638222F716B52C5B5E2EB9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				61EEE58F8E7CB0E3E7391A09 /* Pods-Resonance.debug.xcconfig */,
+				D00EE6F0689FE7C7A6C0380E /* Pods-Resonance.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +122,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2E313CCB24C3797B00E2674C /* Build configuration list for PBXNativeTarget "Resonance" */;
 			buildPhases = (
+				7C41E4295AB3CD02F6A60094 /* [CP] Check Pods Manifest.lock */,
 				2E313CB324C3797900E2674C /* Sources */,
 				2E313CB424C3797900E2674C /* Frameworks */,
 				2E313CB524C3797900E2674C /* Resources */,
+				084273435860A8B27C955D28 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -127,34 +177,68 @@
 			files = (
 				2E313CC724C3797B00E2674C /* LaunchScreen.storyboard in Resources */,
 				2E313CC424C3797B00E2674C /* Assets.xcassets in Resources */,
-				2E313CC224C3797A00E2674C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		084273435860A8B27C955D28 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Resonance/Pods-Resonance-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Resonance/Pods-Resonance-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Resonance/Pods-Resonance-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7C41E4295AB3CD02F6A60094 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Resonance-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2E313CB324C3797900E2674C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E313CBF24C3797900E2674C /* ViewController.swift in Sources */,
+				2E313CBF24C3797900E2674C /* CalendarDisplay.swift in Sources */,
 				2E313CBB24C3797900E2674C /* AppDelegate.swift in Sources */,
 				2E313CBD24C3797900E2674C /* SceneDelegate.swift in Sources */,
+				2ED95C9224C767ED003C598B /* CalendarViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		2E313CC024C3797A00E2674C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2E313CC124C3797A00E2674C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		2E313CC524C3797B00E2674C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -282,6 +366,7 @@
 		};
 		2E313CCC24C3797B00E2674C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 61EEE58F8E7CB0E3E7391A09 /* Pods-Resonance.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -294,12 +379,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.Resonance;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		2E313CCD24C3797B00E2674C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D00EE6F0689FE7C7A6C0380E /* Pods-Resonance.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -312,7 +398,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.Resonance;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
