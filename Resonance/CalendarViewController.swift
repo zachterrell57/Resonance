@@ -27,10 +27,18 @@ class CalendarViewController: UIViewController{
     }
     
     func setCalendarDisplayConstraints(){
-        calendarDisplay.view.translatesAutoresizingMaskIntoConstraints = false
-        calendarDisplay.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
-        calendarDisplay.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        calendarDisplay.view.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        calendarDisplay.view.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        calendarDisplay.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor)
+    }
+}
+
+extension UIViewController{
+    func anchor(top: NSLayoutYAxisAnchor, leading: NSLayoutXAxisAnchor, bottom: NSLayoutYAxisAnchor, trailing: NSLayoutXAxisAnchor){
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.topAnchor.constraint(equalTo: top).isActive = true
+        view.leadingAnchor.constraint(equalTo: leading).isActive = true
+        view.bottomAnchor.constraint(equalTo: bottom).isActive = true
+        view.trailingAnchor.constraint(equalTo: trailing).isActive = true
     }
 }
