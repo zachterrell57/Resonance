@@ -13,6 +13,7 @@
 		2E313CC424C3797B00E2674C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E313CC324C3797B00E2674C /* Assets.xcassets */; };
 		2E313CC724C3797B00E2674C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E313CC524C3797B00E2674C /* LaunchScreen.storyboard */; };
 		2E4372DB24DF682F007DF32B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4372DA24DF682F007DF32B /* Extensions.swift */; };
+		2E4372DD24E08E84007DF32B /* TopNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4372DC24E08E84007DF32B /* TopNavigationViewController.swift */; };
 		2ED95C9224C767ED003C598B /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED95C9124C767ED003C598B /* CalendarViewController.swift */; };
 		DED73D9E5424489CBAF2228A /* Pods_Resonance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34F246A69B4CE65E4CD909F2 /* Pods_Resonance.framework */; };
 /* End PBXBuildFile section */
@@ -26,6 +27,7 @@
 		2E313CC624C3797B00E2674C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2E313CC824C3797B00E2674C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E4372DA24DF682F007DF32B /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		2E4372DC24E08E84007DF32B /* TopNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationViewController.swift; sourceTree = "<group>"; };
 		2ED95C9124C767ED003C598B /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		34F246A69B4CE65E4CD909F2 /* Pods_Resonance.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Resonance.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		61EEE58F8E7CB0E3E7391A09 /* Pods-Resonance.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Resonance.debug.xcconfig"; path = "Target Support Files/Pods-Resonance/Pods-Resonance.debug.xcconfig"; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 				2E313CBE24C3797900E2674C /* CalendarDisplay.swift */,
 				2E4372DA24DF682F007DF32B /* Extensions.swift */,
 				2ED95C9124C767ED003C598B /* CalendarViewController.swift */,
+				2E4372DC24E08E84007DF32B /* TopNavigationViewController.swift */,
 				2E313CBA24C3797900E2674C /* AppDelegate.swift */,
 				2E313CBC24C3797900E2674C /* SceneDelegate.swift */,
 				2E313CC324C3797B00E2674C /* Assets.xcassets */,
@@ -236,6 +239,7 @@
 				2E313CBF24C3797900E2674C /* CalendarDisplay.swift in Sources */,
 				2E313CBB24C3797900E2674C /* AppDelegate.swift in Sources */,
 				2E313CBD24C3797900E2674C /* SceneDelegate.swift in Sources */,
+				2E4372DD24E08E84007DF32B /* TopNavigationViewController.swift in Sources */,
 				2ED95C9224C767ED003C598B /* CalendarViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -13,10 +13,21 @@ import HorizonCalendar
 class CalendarViewController: UIViewController{
     
     let calendarDisplay = CalendarDisplay()
+    let topNavigation = TopNavigationViewController()
     
     override func viewDidLoad() {
         view.backgroundColor = .white
+        
+        loadTopNavigation()
         loadCalendarDisplay()
+    }
+    
+    func loadTopNavigation(){
+        addChild(topNavigation)
+        view.addSubview(topNavigation.view)
+        topNavigation.didMove(toParent: self)
+        
+        setTopNavigationConstraints()
     }
     
     func loadCalendarDisplay(){
@@ -26,19 +37,14 @@ class CalendarViewController: UIViewController{
         setCalendarDisplayConstraints()
     }
     
+    func setTopNavigationConstraints(){
+        topNavigation.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 54, left: 34, bottom: 0, right: -34), size: .init(width: 346, height: 33))
+    }
+    
     func setCalendarDisplayConstraints(){
-        calendarDisplay.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor)
+        calendarDisplay.anchor(top: topNavigation.view.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0), size: .init(width: 411, height: 386))
+        
     }
 }
 
-extension UIViewController{
-    func anchor(top: NSLayoutYAxisAnchor, leading: NSLayoutXAxisAnchor, bottom: NSLayoutYAxisAnchor, trailing: NSLayoutXAxisAnchor){
-        
-        view.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.topAnchor.constraint(equalTo: top).isActive = true
-        view.leadingAnchor.constraint(equalTo: leading).isActive = true
-        view.bottomAnchor.constraint(equalTo: bottom).isActive = true
-        view.trailingAnchor.constraint(equalTo: trailing).isActive = true
-    }
-}
+
