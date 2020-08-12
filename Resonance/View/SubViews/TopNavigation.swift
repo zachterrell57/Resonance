@@ -9,10 +9,9 @@
 import Foundation
 import UIKit
 
-class TopNavigationViewController: UIViewController{
+class TopNavigation: UIViewController{
     
     /// Initializing buttons and UIStack
-    //var buttonStack = UIStackView()
     let todayButton = UIButton(type: .system)
     let calendarButton = UIButton(type: .system)
     let archiveButton = UIButton(type: .system)
@@ -33,6 +32,8 @@ class TopNavigationViewController: UIViewController{
         
         calendarButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         calendarButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+        print(calendarButton.layoutMargins.bottom)
         
         
         archiveButton.anchor(top: view.topAnchor, leading: nil, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .zero, size: .init(width: archiveButton.frame.width, height: archiveButton.frame.height))

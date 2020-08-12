@@ -14,7 +14,7 @@ class CalendarDisplay: UIViewController {
     
     private lazy var calendarView = CalendarView(initialContent: makeContent())
     private lazy var calendar = Calendar(identifier: .gregorian)
-    private lazy var monthWidth = (min(min(view.bounds.width, view.bounds.height) - 64, 512))
+    private lazy var monthWidth = (view.frame.width - 30)
     private lazy var monthsLayout = MonthsLayout.horizontal(monthWidth: monthWidth)
     
     override func viewDidLoad() {
@@ -27,10 +27,8 @@ class CalendarDisplay: UIViewController {
         }
         
         view.addSubview(calendarView)
-        
-        calendarView.insetsLayoutMarginsFromSafeArea = false
-        
-        setCalendarConstraints(calendarView: calendarView)
+                    
+        setCalendarConstraints(calendarView: calendarView)           
     }
     
     /// Creates fully functioning calendar with custom elements
@@ -43,12 +41,10 @@ class CalendarDisplay: UIViewController {
         
         let startDate = Date()
         let endDate = calendar.date(from: DateComponents(year: 2021, month: 7, day: 31))!
-        
-        
+                
         return CalendarViewContent(calendar: calendar, visibleDateRange: startDate...endDate, monthsLayout: monthsLayout)
             
-            //.withInterMonthSpacing(30)
-            .withVerticalDayMargin(8)
+            .withVerticalDayMargin(4.5)
             .withHorizontalDayMargin(8)
             .withBackgroundColor(.clear)
             
@@ -67,6 +63,9 @@ class CalendarDisplay: UIViewController {
                         }
                         label.isAccessibilityElement = true
                         label.accessibilityTraits = [.header]
+                        label.layoutMargins.top = (self.monthWidth / 20)
+                        label.layoutMargins.bottom = (self.monthWidth / 18)
+                        
                         return label
                 },
                     updateViewModel: { label, monthText in
@@ -103,9 +102,9 @@ class CalendarDisplay: UIViewController {
                         label.textAlignment = .center
                         label.textColor = .black
                         label.clipsToBounds = true
-                        label.layer.borderColor = UIColor.clear.cgColor
+                        label.layer.borderColor = UIColor.lightGray.cgColor
                         label.layer.borderWidth = 1
-                        label.layer.cornerRadius = 22
+                        label.layer.cornerRadius = 24
                         return label
                 },
                     updateViewModel: { label, day in
@@ -117,27 +116,30 @@ class CalendarDisplay: UIViewController {
     func setCalendarConstraints(calendarView: CalendarView){
         
         calendarView.translatesAutoresizingMaskIntoConstraints = false
-
-        
-        let monthWidth = min(min(view.bounds.width, view.bounds.height) - 64, 512)
+                
         NSLayoutConstraint.activate([
             calendarView.centerYAnchor.constraint(equalTo: view.layoutMarginsGuide.centerYAnchor),
-            calendarView.heightAnchor.constraint(equalToConstant: monthWidth * 1.1),
+            calendarView.heightAnchor.constraint(equalToConstant: monthWidth * 1.05),
             calendarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             calendarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
     }
     
     override func viewWillLayoutSubviews() {
-        
+
         super.viewWillLayoutSubviews()
         
+        calendarView.insetsLayoutMarginsFromSafeArea = false
+
         if case .horizontal(let monthWidth) = monthsLayout {
             let marginSize = (view.bounds.width - monthWidth) / 2
-            calendarView.layoutMargins.left = marginSize
-            calendarView.layoutMargins.right = marginSize
-            
+            calendarView.layoutMargins.left = (marginSize)
+            calendarView.layoutMargins.right = (marginSize)
+            calendarView.layoutMargins.top = (marginSize / 1.6)
+
             calendarView.setContent(makeContent().withInterMonthSpacing(marginSize))
+            
+           
         }
     }
 }

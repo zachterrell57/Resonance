@@ -12,8 +12,10 @@ import HorizonCalendar
 
 class CalendarViewController: UIViewController{
     
+    // MARK: Initializers
+    
     let calendarDisplay = CalendarDisplay()
-    let topNavigation = TopNavigationViewController()
+    let topNavigation = TopNavigation()
     
     override func viewDidLoad() {
         view.backgroundColor = .white
@@ -21,7 +23,11 @@ class CalendarViewController: UIViewController{
         loadTopNavigation()
         loadCalendarDisplay()
     }
+
     
+    // MARK: Load elements
+    
+    ///loads the top navigation bar into the parent view
     func loadTopNavigation(){
         addChild(topNavigation)
         view.addSubview(topNavigation.view)
@@ -30,6 +36,7 @@ class CalendarViewController: UIViewController{
         setTopNavigationConstraints()
     }
     
+    //loads the calendar into the parent view
     func loadCalendarDisplay(){
         addChild(calendarDisplay)
         view.addSubview(calendarDisplay.view)
@@ -37,12 +44,17 @@ class CalendarViewController: UIViewController{
         setCalendarDisplayConstraints()
     }
     
+    
+    // MARK: Constraints
+    
+    ///sets contstraints of top navigation
     func setTopNavigationConstraints(){
-        topNavigation.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 54, left: 34, bottom: 0, right: -34), size: .init(width: 346, height: 33))
+        topNavigation.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 50, left: 34, bottom: 0, right: -34), size: .init(width: 346, height: 33))
     }
     
+    ///sets contstraints of calendar
     func setCalendarDisplayConstraints(){
-        calendarDisplay.anchor(top: topNavigation.view.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0), size: .init(width: 411, height: 386))
+        calendarDisplay.anchor(top: topNavigation.view.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 10, left: 0, bottom: 0, right: 0), size: .init(width: (view.frame.width - 30), height: ((view.frame.width - 30) * 1.05)))
         
     }
 }
