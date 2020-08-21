@@ -17,11 +17,16 @@ class CalendarViewController: UIViewController{
     let calendarDisplay = CalendarDisplay()
     let topNavigation = TopNavigation()
     
+    //let layout = UICollectionViewLayout().init()
+    let notesFromToday = NotesOnDay()
+    
+    
     override func viewDidLoad() {
         view.backgroundColor = .white
         
         loadTopNavigation()
         loadCalendarDisplay()
+        loadNotesFromToday()
     }
 
     
@@ -44,6 +49,14 @@ class CalendarViewController: UIViewController{
         setCalendarDisplayConstraints()
     }
     
+    //loads the calendar into the parent view
+    func loadNotesFromToday(){
+        addChild(notesFromToday)
+        view.addSubview(notesFromToday.view)
+        calendarDisplay.didMove(toParent: self)
+        setNotesFromTodayConstraints()
+    }
+    
     
     // MARK: Constraints
     
@@ -55,7 +68,11 @@ class CalendarViewController: UIViewController{
     ///sets contstraints of calendar
     func setCalendarDisplayConstraints(){
         calendarDisplay.anchor(top: topNavigation.view.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 10, left: 0, bottom: 0, right: 0), size: .init(width: (view.frame.width - 30), height: ((view.frame.width - 30) * 1.05)))
-        
+    }
+    
+    ///sets constraints for notes from today section
+    func setNotesFromTodayConstraints(){
+        notesFromToday.anchor(top: nil, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .zero, size: .init(width: 414, height: 360))
     }
 }
 

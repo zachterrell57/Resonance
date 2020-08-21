@@ -102,7 +102,7 @@ class CalendarDisplay: UIViewController {
                         label.textAlignment = .center
                         label.textColor = .black
                         label.clipsToBounds = true
-                        label.layer.borderColor = UIColor.lightGray.cgColor
+                        label.layer.borderColor = UIColor.clear.cgColor
                         label.layer.borderWidth = 1
                         label.layer.cornerRadius = 24
                         return label
