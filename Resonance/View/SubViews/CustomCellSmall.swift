@@ -35,8 +35,8 @@ class CustomCellSmall: UICollectionViewCell{
     }
     
     func setupSubViews(){
-        addSubview(titleLabel)
-        setTitleLabelConstraints()
+//        addSubview(titleLabel)
+//        setTitleLabelConstraints()
     }
     
     func setTitleLabelConstraints(){

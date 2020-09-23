@@ -9,14 +9,20 @@
 import Foundation
 import UIKit
 
-class NotesOnDay: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+class EntriesOnDay: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
-    let cellId : String = "cellId"
+    let cellID: String = "cellId"
+    let headerID: String = "headerID"
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
+        
+        //margins on collectionview
+        layout.sectionInset = UIEdgeInsets(top: -40, left: 20, bottom: 0, right: 20)
+        
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.register(CustomCellSmall.self, forCellWithReuseIdentifier: "cell")
+        
         return cv
     }()
     
@@ -30,14 +36,15 @@ class NotesOnDay: UIViewController, UICollectionViewDelegate, UICollectionViewDa
         
         setCollectionViewConstraints()
     }
-    
+        
+    //MARK: Collectionview Section
     let array = ["cat", "hat", "car", "bar"]
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return array.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 170, height: 170)
+        return CGSize(width: 150, height: 150)
     }     
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
@@ -51,7 +58,7 @@ class NotesOnDay: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CustomCellSmall      
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CustomCellSmall
         return cell
     }
     
