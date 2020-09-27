@@ -91,7 +91,7 @@ class CalendarDisplay: UIViewController {
 //            })
 //
 //            .withDayOfWeekItemModelProvider({ (Month, Day) -> AnyCalendarItemModel in
-//                CalendarItem<UILabel, String>(
+//                CalendarItemModel<String>(
 //                    viewModel: monthHeaderDateFormatter.veryShortStandaloneWeekdaySymbols[Day],
 //                    styleID: "DefaultDayOfWeekItem",
 //                    buildView: {
@@ -108,6 +108,24 @@ class CalendarDisplay: UIViewController {
 //                    })
 //            })
             
+            .withDayOfWeekItemModelProvider{ [weak self] day in
+                let textColor: UIColor
+                let backgroundColor: UIColor
+                if #available(iOS 13.0, *) {
+                  textColor = .secondaryLabel
+                  backgroundColor = .systemBackground
+                } else {
+                  textColor = .black
+                  backgroundColor = .white
+                
+
+                let dayOfWeekText = dateFormatter.veryShortStandaloneWeekdaySymbols[weekdayIndex]
+
+                return CalendarItemModel<DayOfWeekView>(
+                    invariantViewProperties: .init(textColor: textColor)
+                  viewModel: .init(text: dayOfWeekText, accessibilityLabel: nil))
+            }
+            
             
             
             .withDayItemModelProvider { [weak self] day in
@@ -117,14 +135,14 @@ class CalendarDisplay: UIViewController {
                 } else {
                     textColor = .black
                 }
-                
+
                 let dayAccessibilityText: String?
                 if let date = self?.calendar.date(from: day.components) {
                     dayAccessibilityText = self?.dayDateFormatter.string(from: date)
                 } else {
                     dayAccessibilityText = nil
                 }
-                
+
                 return CalendarItemModel<DayView>(
                     invariantViewProperties: .init(textColor: textColor, isSelectedStyle: day == selectedDay),
                     viewModel: .init(dayText: "\(day.day)", dayAccessibilityText: dayAccessibilityText))
