@@ -1,17 +1,18 @@
 //
-//  DayOfWeekView.swift
+//  MonthHeaderView.swift
 //  Resonance
 //
-//  Created by Zach Terrell on 9/26/20.
+//  Created by Zach Terrell on 9/27/20.
 //  Copyright © 2020 Zach Terrell. All rights reserved.
 //
+
 
 import HorizonCalendar
 import UIKit
 
 // MARK: - DayView
 
-final class DayOfWeekView: UIView {
+final class MonthHeaderView: UIView {
 
   // MARK: Lifecycle
 
@@ -63,7 +64,7 @@ final class DayOfWeekView: UIView {
 
 // MARK: UIAccessibility
 
-extension DayOfWeekView {
+extension MonthHeaderView {
 
   override var isAccessibilityElement: Bool {
     get { true }
@@ -79,7 +80,7 @@ extension DayOfWeekView {
 
 // MARK: CalendarItemViewRepresentable
 
-extension DayOfWeekView: CalendarItemViewRepresentable {
+extension MonthHeaderView: CalendarItemViewRepresentable {
 
   struct InvariantViewProperties: Hashable {
     var font = UIFont.systemFont(ofSize: 18 )
@@ -94,14 +95,15 @@ extension DayOfWeekView: CalendarItemViewRepresentable {
 
   static func makeView(
     withInvariantViewProperties invariantViewProperties: InvariantViewProperties)
-    -> DayOfWeekView
+    -> MonthHeaderView
   {
-    DayOfWeekView(invariantViewProperties: invariantViewProperties)
+    MonthHeaderView(invariantViewProperties: invariantViewProperties)
   }
 
-  static func setViewModel(_ viewModel: ViewModel, on view: DayOfWeekView) {
+  static func setViewModel(_ viewModel: ViewModel, on view: MonthHeaderView) {
     view.dayText = viewModel.dayText
     view.dayAccessibilityText = viewModel.dayAccessibilityText
   }
 
 }
+

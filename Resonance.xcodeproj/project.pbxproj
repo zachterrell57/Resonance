@@ -16,6 +16,7 @@
 		2E4372DB24DF682F007DF32B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4372DA24DF682F007DF32B /* Extensions.swift */; };
 		2E4372DD24E08E84007DF32B /* TopNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4372DC24E08E84007DF32B /* TopNavigation.swift */; };
 		2E5017F22504544A00724084 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5017F12504544A00724084 /* DayView.swift */; };
+		2ED0AB8D25217DF30046742A /* MonthHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED0AB8C25217DF30046742A /* MonthHeaderView.swift */; };
 		2ED6828225201383008E9017 /* DayOfWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED6828125201383008E9017 /* DayOfWeekView.swift */; };
 		2ED95C9224C767ED003C598B /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED95C9124C767ED003C598B /* CalendarViewController.swift */; };
 		2EDD26F124ECAE4400653193 /* CustomCellSmall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDD26F024ECAE4400653193 /* CustomCellSmall.swift */; };
@@ -36,6 +37,7 @@
 		2E4372DA24DF682F007DF32B /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		2E4372DC24E08E84007DF32B /* TopNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigation.swift; sourceTree = "<group>"; };
 		2E5017F12504544A00724084 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
+		2ED0AB8C25217DF30046742A /* MonthHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthHeaderView.swift; sourceTree = "<group>"; };
 		2ED6828125201383008E9017 /* DayOfWeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekView.swift; sourceTree = "<group>"; };
 		2ED95C9124C767ED003C598B /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		2EDD26F024ECAE4400653193 /* CustomCellSmall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCellSmall.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				2EDD26F024ECAE4400653193 /* CustomCellSmall.swift */,
 				2E5017F12504544A00724084 /* DayView.swift */,
 				2ED6828125201383008E9017 /* DayOfWeekView.swift */,
+				2ED0AB8C25217DF30046742A /* MonthHeaderView.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -184,7 +187,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1160;
-				LastUpgradeCheck = 1160;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Zach Terrell";
 				TargetAttributes = {
 					2E313CB624C3797900E2674C = {
@@ -275,6 +278,7 @@
 				2E313CBF24C3797900E2674C /* CalendarDisplay.swift in Sources */,
 				2ED6828225201383008E9017 /* DayOfWeekView.swift in Sources */,
 				2E313CBB24C3797900E2674C /* AppDelegate.swift in Sources */,
+				2ED0AB8D25217DF30046742A /* MonthHeaderView.swift in Sources */,
 				2E313CBD24C3797900E2674C /* SceneDelegate.swift in Sources */,
 				2EDD26F124ECAE4400653193 /* CustomCellSmall.swift in Sources */,
 				2E4372DD24E08E84007DF32B /* TopNavigation.swift in Sources */,
@@ -324,6 +328,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -384,6 +389,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;

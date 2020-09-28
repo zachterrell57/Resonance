@@ -47,9 +47,9 @@ class CalendarDisplay: UIViewController {
     /// - Returns: Calendar view content representing the full calendar 
     private func makeContent() -> CalendarViewContent {
         
-        let monthHeaderDateFormatter = DateFormatter()
-        monthHeaderDateFormatter.calendar = calendar
-        monthHeaderDateFormatter.dateFormat = "MMMM yyyy"
+        let dateFormatter = DateFormatter()
+        dateFormatter.calendar = calendar
+        dateFormatter.dateFormat = "MMMM yyyy"
         
         let startDate = calendar.date(from: DateComponents(year: 2020, month: 01, day: 16))!
         let endDate = calendar.date(from: DateComponents(year: 2020, month: 12, day: 05))!
@@ -66,7 +66,7 @@ class CalendarDisplay: UIViewController {
             
 //            .withMonthHeaderItemProvider({ (Month) -> AnyCalendarItem in
 //                return CalendarItem<UILabel, String>(
-//                    viewModel: monthHeaderDateFormatter.string(from: self.calendar.firstDate(of: Month)),
+//                    viewModel: dateFormatter.string(from: self.calendar.firstDate(of: Month)),
 //                    styleID: "MonthHeaderStyle",
 //                    buildView: {
 //                        let label = UILabel()
@@ -89,44 +89,44 @@ class CalendarDisplay: UIViewController {
 //                        label.accessibilityLabel = monthText
 //                    })
 //            })
-//
-//            .withDayOfWeekItemModelProvider({ (Month, Day) -> AnyCalendarItemModel in
-//                CalendarItemModel<String>(
-//                    viewModel: monthHeaderDateFormatter.veryShortStandaloneWeekdaySymbols[Day],
-//                    styleID: "DefaultDayOfWeekItem",
-//                    buildView: {
-//                        let label = UILabel()
-//                        label.textAlignment = .center
-//                        label.font = UIFont.systemFont(ofSize: 18)
-//                        label.textColor = .black
-//                        label.backgroundColor = .clear
-//                        label.isAccessibilityElement = false
-//                        return label
-//                    },
-//                    updateViewModel: { label, dayOfWeekText in
-//                        label.text = dayOfWeekText
-//                    })
-//            })
             
-            .withDayOfWeekItemModelProvider{ [weak self] day in
+            .withMonthHeaderItemModelProvider{ month in
                 let textColor: UIColor
-                let backgroundColor: UIColor
+                //let backgroundColor: UIColor
                 if #available(iOS 13.0, *) {
-                  textColor = .secondaryLabel
-                  backgroundColor = .systemBackground
+                  textColor = .label                  
                 } else {
-                  textColor = .black
-                  backgroundColor = .white
+                    textColor = .black
+                }
+                //backgroundColor = .clear
                 
-
                 let dayOfWeekText = dateFormatter.veryShortStandaloneWeekdaySymbols[weekdayIndex]
+               
 
                 return CalendarItemModel<DayOfWeekView>(
-                    invariantViewProperties: .init(textColor: textColor)
-                  viewModel: .init(text: dayOfWeekText, accessibilityLabel: nil))
+                  invariantViewProperties: .init(textColor: textColor),
+                  viewModel: .init(dayText: dayOfWeekText, dayAccessibilityText: nil))
             }
+//
             
-            
+            .withDayOfWeekItemModelProvider{ month, weekdayIndex in
+                let textColor: UIColor
+                //let backgroundColor: UIColor
+                if #available(iOS 13.0, *) {
+                  textColor = .label
+                  
+                } else {
+                    textColor = .black
+                }
+                //backgroundColor = .clear
+                
+                let dayOfWeekText = dateFormatter.veryShortStandaloneWeekdaySymbols[weekdayIndex]
+               
+
+                return CalendarItemModel<DayOfWeekView>(
+                  invariantViewProperties: .init(textColor: textColor),
+                  viewModel: .init(dayText: dayOfWeekText, dayAccessibilityText: nil))
+            }
             
             .withDayItemModelProvider { [weak self] day in
                 let textColor: UIColor
