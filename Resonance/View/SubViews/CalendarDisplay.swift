@@ -64,64 +64,34 @@ class CalendarDisplay: UIViewController {
             .withHorizontalDayMargin(8)
             .withBackgroundColor(.clear)
             
-//            .withMonthHeaderItemProvider({ (Month) -> AnyCalendarItem in
-//                return CalendarItem<UILabel, String>(
-//                    viewModel: dateFormatter.string(from: self.calendar.firstDate(of: Month)),
-//                    styleID: "MonthHeaderStyle",
-//                    buildView: {
-//                        let label = UILabel()
-//                        label.textAlignment = .center
-//                        label.font = UIFont.systemFont(ofSize: 24)
-//                        if #available(iOS 13.0, *) {
-//                            label.textColor = .label
-//                        } else {
-//                            label.textColor = .black
-//                        }
-//                        label.isAccessibilityElement = true
-//                        label.accessibilityTraits = [.header]
-//                        label.layoutMargins.top = (self.monthWidth / 20)
-//                        label.layoutMargins.bottom = (self.monthWidth / 18)
-//
-//                        return label
-//                    },
-//                    updateViewModel: { label, monthText in
-//                        label.text = monthText
-//                        label.accessibilityLabel = monthText
-//                    })
-//            })
-            
             .withMonthHeaderItemModelProvider{ month in
                 let textColor: UIColor
-                //let backgroundColor: UIColor
                 if #available(iOS 13.0, *) {
                   textColor = .label                  
                 } else {
                     textColor = .black
                 }
-                //backgroundColor = .clear
                 
-                let dayOfWeekText = dateFormatter.veryShortStandaloneWeekdaySymbols[weekdayIndex]
+                let monthText = dateFormatter.string(from: self.calendar.firstDate(of: month))
                
-
-                return CalendarItemModel<DayOfWeekView>(
-                  invariantViewProperties: .init(textColor: textColor),
-                  viewModel: .init(dayText: dayOfWeekText, dayAccessibilityText: nil))
+                return CalendarItemModel<MonthHeaderView>(
+                    invariantViewProperties: .init(
+                        font: UIFont.systemFont(ofSize: 24),
+                        textColor: textColor,
+                        monthWidth: self.monthWidth),
+                    viewModel: .init(month: monthText))
             }
-//
             
             .withDayOfWeekItemModelProvider{ month, weekdayIndex in
                 let textColor: UIColor
-                //let backgroundColor: UIColor
                 if #available(iOS 13.0, *) {
                   textColor = .label
                   
                 } else {
                     textColor = .black
                 }
-                //backgroundColor = .clear
                 
                 let dayOfWeekText = dateFormatter.veryShortStandaloneWeekdaySymbols[weekdayIndex]
-               
 
                 return CalendarItemModel<DayOfWeekView>(
                   invariantViewProperties: .init(textColor: textColor),
