@@ -16,7 +16,7 @@ class CalendarViewController: UIViewController{
     
     let calendarDisplay = CalendarDisplay()
     let topNavigation = TopNavigation()
-    let entryContainerView = EntryContainerView()
+    let addEntryContainer = AddEntryContainer()
     
     //let layout = UICollectionViewLayout().init()
     //let notesFromToday = NotesOnDay()
@@ -27,8 +27,7 @@ class CalendarViewController: UIViewController{
         
         loadTopNavigation()
         loadCalendarDisplay()
-        loadEntryContainerView()
-        //loadNotesFromToday()
+        loadAddEntryContainer()
     }
 
     
@@ -49,53 +48,44 @@ class CalendarViewController: UIViewController{
         view.addSubview(calendarDisplay.view)
         calendarDisplay.didMove(toParent: self)
         
-        calendarDisplay.view.backgroundColor = .blue
+        calendarDisplay.view.backgroundColor = .white
         
         setCalendarDisplayConstraints()
     }
     
-    func loadEntryContainerView(){
-        addChild(entryContainerView)
-        view.addSubview(entryContainerView.view)
-        entryContainerView.didMove(toParent: self)
+    func loadAddEntryContainer(){
+        addChild(addEntryContainer)
+        view.addSubview(addEntryContainer.view)
+        addEntryContainer.didMove(toParent: self)
         
-        entryContainerView.view.layer.cornerRadius = 20
+        addEntryContainer.view.backgroundColor = #colorLiteral(red: 0.2349999994, green: 0.8309999704, blue: 0.5609999895, alpha: 1)
+        addEntryContainer.view.layer.cornerRadius = 20
         
-        setEntryViewConstraints()
+        setAddEntryContainerConstraints()
     }
-    
-    //loads the calendar into the parent view
-//    func loadNotesFromToday(){
-//        addChild(notesFromToday)
-//        view.addSubview(notesFromToday.view)
-//        notesFromToday.didMove(toParent: self)
-//
-//        notesFromToday.collectionView.layer.cornerRadius = 20
-//
-//        setNotesFromTodayConstraints()
-//    }
-    
-    
+        
+        
     // MARK: Constraints
     
     ///sets contstraints of top navigation
     func setTopNavigationConstraints(){
-        topNavigation.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 50, left: 34, bottom: 0, right: -34), size: .init(width: 346, height: 33))
+        let topPadding = CGFloat(50)
+        let leftPadding = CGFloat(34)
+        let bottomPadding = CGFloat(0)
+        let rightPadding = CGFloat(-34)
+        topNavigation.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: topPadding, left: leftPadding, bottom: bottomPadding, right: rightPadding), size: .init(width: 346, height: 33))
     }
     
     ///sets contstraints of calendar
     func setCalendarDisplayConstraints(){
-        calendarDisplay.anchor(top: topNavigation.view.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 10, left: 0, bottom: 0, right: 0), size: .init(width: (view.frame.width - 30), height: ((view.frame.width - 30) * 1.05)))
+        let height = view.frame.width * 1.08
+        let width = view.frame.width
+        calendarDisplay.anchor(top: topNavigation.view.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0), size: .init(width: width, height: height))
     }
     
-    func setEntryViewConstraints(){
-        entryContainerView.anchor(top: calendarDisplay.view.bottomAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor)
+    func setAddEntryContainerConstraints(){
+        addEntryContainer.anchor(top: nil, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .zero, size: .init(width: view.frame.width, height: (view.frame.height/2.15)))        
     }
-    
-    ///sets constraints for notes from today section
-//    func setNotesFromTodayConstraints(){
-//        notesFromToday.anchor(top: nil, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .zero, size: .init(width: 414, height: 360))
-//    }
 }
 
 

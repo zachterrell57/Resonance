@@ -1,8 +1,8 @@
 //
-//  DayView.swift
+//  DayOfWeekView.swift
 //  Resonance
 //
-//  Created by Zach Terrell on 9/5/20.
+//  Created by Zach Terrell on 9/26/20.
 //  Copyright © 2020 Zach Terrell. All rights reserved.
 //
 
@@ -11,22 +11,20 @@ import UIKit
 
 // MARK: - DayView
 
-final class DayView: UIView {
+final class DayOfWeekView: UIView {
 
   // MARK: Lifecycle
 
   init(invariantViewProperties: InvariantViewProperties) {
-    dayLabel = UILabel()
-    dayLabel.font = invariantViewProperties.font
-    dayLabel.textAlignment = invariantViewProperties.textAlignment
-    dayLabel.textColor = invariantViewProperties.textColor
+    dayofWeekLabel = UILabel()
+    dayofWeekLabel.font = invariantViewProperties.font
+    dayofWeekLabel.textAlignment = invariantViewProperties.textAlignment
+    dayofWeekLabel.textColor = invariantViewProperties.textColor
+    dayofWeekLabel.backgroundColor = .white
 
     super.init(frame: .zero)
-
-    addSubview(dayLabel)
-
-    layer.borderColor = invariantViewProperties.selectedColor.cgColor
-    layer.borderWidth = invariantViewProperties.isSelectedStyle ? 2 : 0
+     
+    addSubview(dayofWeekLabel)    
   }
 
   required init?(coder: NSCoder) {
@@ -36,8 +34,8 @@ final class DayView: UIView {
   // MARK: Internal
 
   var dayText: String {
-    get { dayLabel.text ?? "" }
-    set { dayLabel.text = newValue }
+    get { dayofWeekLabel.text ?? "" }
+    set { dayofWeekLabel.text = newValue }
   }
 
   var dayAccessibilityText: String?
@@ -50,13 +48,13 @@ final class DayView: UIView {
 
   override func layoutSubviews() {
     super.layoutSubviews()
-    dayLabel.frame = bounds
+    dayofWeekLabel.frame = bounds
     layer.cornerRadius = min(bounds.width, bounds.height) / 2
   }
 
   // MARK: Private
 
-  private let dayLabel: UILabel
+  private let dayofWeekLabel: UILabel
 
   private func updateHighlightIndicator() {
     backgroundColor = isHighlighted ? UIColor.black.withAlphaComponent(0.1) : .clear
@@ -66,7 +64,7 @@ final class DayView: UIView {
 
 // MARK: UIAccessibility
 
-extension DayView {
+extension DayOfWeekView {
 
   override var isAccessibilityElement: Bool {
     get { true }
@@ -82,14 +80,12 @@ extension DayView {
 
 // MARK: CalendarItemViewRepresentable
 
-extension DayView: CalendarItemViewRepresentable {
+extension DayOfWeekView: CalendarItemViewRepresentable {
 
   struct InvariantViewProperties: Hashable {
-    var font = UIFont.systemFont(ofSize: 18)
+    var font = UIFont.systemFont(ofSize: 18 )
     var textAlignment = NSTextAlignment.center
     var textColor: UIColor
-    var isSelectedStyle: Bool
-    var selectedColor = UIColor.blue
   }
 
   struct ViewModel: Equatable {
@@ -99,12 +95,12 @@ extension DayView: CalendarItemViewRepresentable {
 
   static func makeView(
     withInvariantViewProperties invariantViewProperties: InvariantViewProperties)
-    -> DayView
+    -> DayOfWeekView
   {
-    DayView(invariantViewProperties: invariantViewProperties)
+    DayOfWeekView(invariantViewProperties: invariantViewProperties)
   }
 
-  static func setViewModel(_ viewModel: ViewModel, on view: DayView) {
+  static func setViewModel(_ viewModel: ViewModel, on view: DayOfWeekView) {
     view.dayText = viewModel.dayText
     view.dayAccessibilityText = viewModel.dayAccessibilityText
   }

@@ -19,6 +19,7 @@ class TopNavigation: UIViewController{
     override func viewDidLoad() {
         super .viewDidLoad()
         allignButtons()
+        view.backgroundColor = .white
     }
     
     /// Alligns buttons at the top in a horizontal row, setting constraints as well
@@ -33,8 +34,6 @@ class TopNavigation: UIViewController{
         calendarButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         calendarButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
-        print(calendarButton.layoutMargins.bottom)
-        
         
         archiveButton.anchor(top: view.topAnchor, leading: nil, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .zero, size: .init(width: archiveButton.frame.width, height: archiveButton.frame.height))
     }
@@ -42,21 +41,21 @@ class TopNavigation: UIViewController{
     /// Configures the properties and actions for the 3 navigation buttons
     func configureButtons(){
         
-        todayButton.backgroundColor = .clear
+        todayButton.backgroundColor = .white
         todayButton.setTitle("Today", for: .normal)
         todayButton.tintColor = .black
         todayButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         todayButton.addTarget(self, action: #selector(self.todayButtonPressed(sender:)),
                               for: .touchUpInside)
         
-        calendarButton.backgroundColor = .clear
+        calendarButton.backgroundColor = .white
         calendarButton.setTitle("Calendar", for: .normal)
         calendarButton.tintColor = .black
         calendarButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         calendarButton.addTarget(self, action: #selector(self.calendarButtonPressed(sender:)),
                                  for: .touchUpInside)
                 
-        archiveButton.backgroundColor = .clear
+        archiveButton.backgroundColor = .white
         archiveButton.setTitle("Archive", for: .normal)
         archiveButton.tintColor = .black
         archiveButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)

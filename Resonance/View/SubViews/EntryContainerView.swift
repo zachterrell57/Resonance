@@ -16,7 +16,7 @@ class EntryContainerView: UIViewController{
     
     override func viewDidLoad(){
         super.viewDidLoad()
-        view.backgroundColor = .red
+        view.backgroundColor = .white
         
         loadEntryHeader()
         loadEntriesOnDay()
@@ -39,10 +39,10 @@ class EntryContainerView: UIViewController{
     }
     
     func setEntryHeaderConstraints(){
-        entryHeader.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 8, left: 24, bottom: 0, right: 0), size: .init(width: view.frame.width, height: 40))
+        entryHeader.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 5, left: 24, bottom: 0, right: 0), size: .init(width: view.frame.width, height: 40))
     }
     
     func setEntriesOnDayConstraints(){
-        entriesOnDay.anchor(top: entryHeader.view.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .zero, size: .init(width: view.frame.width, height: 321))
+        entriesOnDay.anchor(top: entryHeader.view.bottomAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .zero, size: .zero)
     }
 }

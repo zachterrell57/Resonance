@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2E20BB4624EB860C00977412 /* EntriesOnDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E20BB4524EB860C00977412 /* EntriesOnDate.swift */; };
+		2E2023312589CF2E00CD5ACF /* AddEntryContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2023302589CF2E00CD5ACF /* AddEntryContainer.swift */; };
+		2E202335258AF02800CD5ACF /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E202334258AF02800CD5ACF /* EntryViewController.swift */; };
+		2E20BB4624EB860C00977412 /* EntriesOnDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E20BB4524EB860C00977412 /* EntriesOnDay.swift */; };
 		2E313CBB24C3797900E2674C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E313CBA24C3797900E2674C /* AppDelegate.swift */; };
 		2E313CBD24C3797900E2674C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E313CBC24C3797900E2674C /* SceneDelegate.swift */; };
 		2E313CBF24C3797900E2674C /* CalendarDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E313CBE24C3797900E2674C /* CalendarDisplay.swift */; };
@@ -26,7 +28,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2E20BB4524EB860C00977412 /* EntriesOnDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesOnDate.swift; sourceTree = "<group>"; };
+		2E2023302589CF2E00CD5ACF /* AddEntryContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEntryContainer.swift; sourceTree = "<group>"; };
+		2E202334258AF02800CD5ACF /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EntryViewController.swift; path = Resonance/View/SuperViews/EntryViewController.swift; sourceTree = SOURCE_ROOT; };
+		2E20BB4524EB860C00977412 /* EntriesOnDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesOnDay.swift; sourceTree = "<group>"; };
 		2E313CB724C3797900E2674C /* Resonance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Resonance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E313CBA24C3797900E2674C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2E313CBC24C3797900E2674C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,9 +72,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2E20232E2589CEB700CD5ACF /* CalendarDisplayViews */ = {
+			isa = PBXGroup;
+			children = (
+				2ED6828125201383008E9017 /* DayOfWeekView.swift */,
+				2ED0AB8C25217DF30046742A /* MonthHeaderView.swift */,
+				2E5017F12504544A00724084 /* DayView.swift */,
+			);
+			path = CalendarDisplayViews;
+			sourceTree = "<group>";
+		};
 		2E20BB4324E3CE2200977412 /* SuperViews */ = {
 			isa = PBXGroup;
 			children = (
+				2E202334258AF02800CD5ACF /* EntryViewController.swift */,
 				2ED95C9124C767ED003C598B /* CalendarViewController.swift */,
 			);
 			path = SuperViews;
@@ -81,13 +96,12 @@
 			children = (
 				2E4372DC24E08E84007DF32B /* TopNavigation.swift */,
 				2E313CBE24C3797900E2674C /* CalendarDisplay.swift */,
+				2E20232E2589CEB700CD5ACF /* CalendarDisplayViews */,
+				2E2023302589CF2E00CD5ACF /* AddEntryContainer.swift */,
 				2EEF1DBD2504151900C956A7 /* EntryContainerView.swift */,
 				2EEF1DBB250413FB00C956A7 /* EntriesOnDayHeader.swift */,
-				2E20BB4524EB860C00977412 /* EntriesOnDate.swift */,
+				2E20BB4524EB860C00977412 /* EntriesOnDay.swift */,
 				2EDD26F024ECAE4400653193 /* CustomCellSmall.swift */,
-				2E5017F12504544A00724084 /* DayView.swift */,
-				2ED6828125201383008E9017 /* DayOfWeekView.swift */,
-				2ED0AB8C25217DF30046742A /* MonthHeaderView.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -283,8 +297,10 @@
 				2EDD26F124ECAE4400653193 /* CustomCellSmall.swift in Sources */,
 				2E4372DD24E08E84007DF32B /* TopNavigation.swift in Sources */,
 				2EEF1DBE2504151900C956A7 /* EntryContainerView.swift in Sources */,
+				2E202335258AF02800CD5ACF /* EntryViewController.swift in Sources */,
 				2ED95C9224C767ED003C598B /* CalendarViewController.swift in Sources */,
-				2E20BB4624EB860C00977412 /* EntriesOnDate.swift in Sources */,
+				2E2023312589CF2E00CD5ACF /* AddEntryContainer.swift in Sources */,
+				2E20BB4624EB860C00977412 /* EntriesOnDay.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

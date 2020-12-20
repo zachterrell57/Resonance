@@ -39,6 +39,7 @@ class CalendarDisplay: UIViewController {
         }
         
         view.addSubview(calendarView)
+        calendarView.backgroundColor = .clear
         
         setCalendarConstraints(calendarView: calendarView)           
     }
@@ -60,9 +61,8 @@ class CalendarDisplay: UIViewController {
             visibleDateRange: startDate...endDate,
             monthsLayout: monthsLayout)
             
-            .withVerticalDayMargin(4.5)
-            .withHorizontalDayMargin(8)
-            .withBackgroundColor(.clear)
+            .withVerticalDayMargin(monthWidth * 0.0208)
+            .withHorizontalDayMargin(monthWidth * 0.0208)
             
             .withMonthHeaderItemModelProvider{ month in
                 let textColor: UIColor
@@ -76,7 +76,7 @@ class CalendarDisplay: UIViewController {
                
                 return CalendarItemModel<MonthHeaderView>(
                     invariantViewProperties: .init(
-                        font: UIFont.systemFont(ofSize: 24),
+                        font: UIFont.systemFont(ofSize: 24, weight: .regular),
                         textColor: textColor,
                         monthWidth: self.monthWidth),
                     viewModel: .init(month: monthText))
@@ -121,14 +121,14 @@ class CalendarDisplay: UIViewController {
     
     func setCalendarConstraints(calendarView: CalendarView){
         
-        calendarView.translatesAutoresizingMaskIntoConstraints = false
+        calendarView.translatesAutoresizingMaskIntoConstraints = false                
         
         NSLayoutConstraint.activate([
-            calendarView.centerYAnchor.constraint(equalTo: view.layoutMarginsGuide.centerYAnchor),
-            calendarView.heightAnchor.constraint(equalToConstant: monthWidth * 1.05),
-            calendarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            calendarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        ])
+                calendarView.centerYAnchor.constraint(equalTo: view.layoutMarginsGuide.centerYAnchor),
+                calendarView.heightAnchor.constraint(equalToConstant: monthWidth * 1.1),
+                calendarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                calendarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+              ])
     }
     
     override func viewWillLayoutSubviews() {
@@ -144,9 +144,7 @@ class CalendarDisplay: UIViewController {
             calendarView.layoutMargins.top = (marginSize / 1.6)
             calendarView.layoutMargins.bottom = 0
             
-            calendarView.setContent(makeContent().withInterMonthSpacing(marginSize))
-            
-            
+            calendarView.setContent(makeContent().withInterMonthSpacing(marginSize))                        
         }
     }
 }

@@ -18,7 +18,7 @@ class EntriesOnDay: UIViewController, UICollectionViewDelegate, UICollectionView
         let layout = UICollectionViewFlowLayout()
         
         //margins on collectionview
-        layout.sectionInset = UIEdgeInsets(top: -40, left: 20, bottom: 0, right: 20)
+        layout.sectionInset = UIEdgeInsets(top: 5, left: 20, bottom: 0, right: 20)
         
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.register(CustomCellSmall.self, forCellWithReuseIdentifier: "cell")
@@ -32,7 +32,7 @@ class EntriesOnDay: UIViewController, UICollectionViewDelegate, UICollectionView
         
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.backgroundColor = .purple
+        collectionView.backgroundColor = .white
         
         setCollectionViewConstraints()
     }
@@ -44,7 +44,7 @@ class EntriesOnDay: UIViewController, UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 150, height: 150)
+        return CGSize(width: 170, height: 170)
     }     
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
