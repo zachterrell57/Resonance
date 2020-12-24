@@ -2,7 +2,7 @@
 //  EntryViewController.swift
 //  Resonance
 //
-//  Created by Zach Terrell on 12/16/20.
+//  Created by Zach Terrell on 12/19/20.
 //  Copyright © 2020 Zach Terrell. All rights reserved.
 //
 
@@ -11,128 +11,78 @@ import UIKit
 
 class EntryViewController: UIViewController{
     
-    private let addTitleButton = UIButton()
-    private let addTitleLabel = UILabel()
+    let entryView = EntryView()
     
-    private let addTagsButton = UIButton()
-    private let addTagsLabel = UILabel()
-    
-    private let textArea = UITextView()
+    let addLabel = UILabel()
+    let gestureArea = UIView()
     
     override func viewDidLoad() {
-        view.backgroundColor = .white
+        super.viewDidLoad()
         
-        let addTitleButtonFrame = CGRect(x: 0.0, y: 0.0, width: 60.0, height: 60.0)
-        let addTagsButtonFrame = CGRect(x: 0.0, y: 0.0, width: 60.0, height: 60.0)
-        let textAreaFrame = CGRect(x: 0.0, y: 0.0, width: 360.0, height: 480.0)
+        self.view.backgroundColor = #colorLiteral(red: 0.2349999994, green: 0.8309999704, blue: 0.5609999895, alpha: 1)
         
-        addTitleButton.frame = addTitleButtonFrame
-        addTagsButton.frame = addTagsButtonFrame
-        textArea.frame = textAreaFrame
-        //textArea.becomeFirstResponder() //brings up keyboard immediately
+        gestureArea.backgroundColor = .red
         
-        setupAddTitleButton()
-        setupAddTitleLabel()
-        setupAddTagsButton()
-        setupTextArea()
+        loadEntryView()
+        //loadAddLabel()
+        //loadAddSwipe()
     }
     
-    
-    //MARK: Button Setup
-    
-    func setupAddTitleButton(){
-        addTitleButton.backgroundColor = .black
-        addTitleButton.layer.cornerRadius = 30
-        
-        let iconConfig = UIImage.SymbolConfiguration(pointSize: 40)
-        let addIcon = UIImage(systemName: "plus", withConfiguration: iconConfig)
-        addTitleButton.setImage(addIcon, for: .normal)
-        addTitleButton.imageView?.tintColor = .white
-        
-        addTitleButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(addTitleButton)
-        
-        setAddTitleButtonConstraints()
+    @objc func gestureFired(_ gesture: UIPanGestureRecognizer){
+        if gesture.state == .began{
+            
+        }
+        else if gesture.state == .changed{
+            let translation = gesture.translation(in: self.view)
+            if(translation.y > 0){
+                entryView.view.transform = CGAffineTransform(translationX: 0, y: translation.y)
+            }
+            if(translation.y >= 250){
+                print("new entry")
+                let calendarViewController = CalendarViewController()
+                self.present(calendarViewController, animated: true)
+                gesture.state = .ended
+            }
+        }
+        else if gesture.state == .ended{
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.1, options: .curveEaseIn, animations:  {
+                self.view.transform = .identity
+            })
+        }
     }
     
-    func setupAddTagsButton(){
-        addTagsButton.backgroundColor = .black
-        addTagsButton.layer.cornerRadius = 30
+    func loadAddSwipe(){
+        let recognizer = UIPanGestureRecognizer(target: self, action: #selector(gestureFired(_:)))
         
-        let iconConfig = UIImage.SymbolConfiguration(pointSize: 40)
-        let addIcon = UIImage(systemName: "plus", withConfiguration: iconConfig)
-        addTagsButton.setImage(addIcon, for: .normal)
-        addTagsButton.imageView?.tintColor = .white
+        gestureArea.addGestureRecognizer(recognizer)
+        gestureArea.isUserInteractionEnabled = true
         
-        addTitleButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(addTagsButton)
-        
-        setAddTagsButtonConstraints()
+        view.addSubview(gestureArea)
+        setGestureAreaConstraints()
     }
     
-    
-    //MARK: Label Setup
-    
-    func setupAddTitleLabel(){
-        addTitleLabel.font = UIFont.systemFont(ofSize: 14)
-        addTitleLabel.backgroundColor = .red
-        addTitleLabel.textColor = .black
-        
-        addTitleButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(addTitleLabel)
-        
-        setAddTitleLabelConstraints()                    
+    func loadEntryView(){
+        addChild(entryView)
+        view.addSubview(entryView.view)
+        entryView.didMove(toParent: self)
+        setEntryViewConstraints()
     }
     
-    
-    //MARK: TextField Setup
-    
-    func setupTextArea(){
-        textArea.layer.cornerRadius = 20
-        textArea.layer.borderWidth = 2
-        textArea.layer.borderColor = CGColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1)
-        
-        addTitleButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(textArea)
-        setTextAreaConstraints()
+    func loadAddLabel(){
+        addLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        addLabel.text = "Swipe Up to Complete Entry"
+        addLabel.textColor = .white
+        addLabel.textAlignment = .center
+        view.addSubview(addLabel)
+
+        addLabel.anchor(top: nil, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0), size: .zero)
     }
     
-    
-    //MARK: Constraints
-    
-    /// Setting constraints for the addTitleButton
-    func setAddTitleButtonConstraints(){
-        addTitleButton.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 80, left: 0, bottom: 0, right: 0), size: .init(width: 60.0, height: 60.0))
-        NSLayoutConstraint.activate([
-                addTitleButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-            ])
+    func setGestureAreaConstraints(){
+        gestureArea.anchor(top: nil, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .zero, size: .init(width: view.frame.width, height: 100))
     }
     
-    /// Setting constraints for the addTagsButton
-    func setAddTagsButtonConstraints(){
-        addTagsButton.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 200, left: 0, bottom: 0, right: 0), size: .init(width: 60.0, height: 60.0))
-        NSLayoutConstraint.activate([
-                addTagsButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-            ])
-    }
-    
-    /// Setting constraints for the text area
-    func setTextAreaConstraints(){
-        textArea.anchor(top: nil, leading: nil, bottom: view.bottomAnchor, trailing: nil, padding: .init(top: 0, left: 0, bottom: -50, right: 0), size: .init(width: 360.0, height: 480.0))
-        NSLayoutConstraint.activate([
-                textArea.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-            ])
-    }
-    
-    /// Setting constraints for the title label
-    func setAddTitleLabelConstraints(){
-        addTitleLabel.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .zero, size: .init(width: 100.0, height: 100.0))
-//        NSLayoutConstraint.activate([
-//                textArea.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-//            ])
+    func setEntryViewConstraints(){
+        entryView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .zero, size: .init(width: view.bounds.width, height: 200))
     }
 }

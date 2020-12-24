@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class EntryContainerView: UIViewController{
+class TodayEntryContainerView: UIViewController{
     
     let entriesOnDay = EntriesOnDay()
     let entryHeader = EntriesOnDayHeader()

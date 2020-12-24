@@ -13,7 +13,7 @@ import UIKit
 
 class AddEntryContainer: UIViewController{
     
-    let entryContainerView = EntryContainerView()
+    let entryContainerView = TodayEntryContainerView()
     let addLabel = UILabel()
     
     let gestureArea = UIView()
@@ -29,7 +29,6 @@ class AddEntryContainer: UIViewController{
         loadAddSwipe()
         loadAddLabel()
         loadEntryContainerView()
-        print(view.center)
     }
     
     @objc func gestureFired(_ gesture: UIPanGestureRecognizer){
