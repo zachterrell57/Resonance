@@ -20,16 +20,16 @@ class EntryView: UIViewController{
     private let textArea = UITextView()
     
     override func viewDidLoad() {
-        view.backgroundColor = .red
-        
-        let addTitleButtonFrame = CGRect(x: 0.0, y: 0.0, width: (view.bounds.width/6.9), height: 60.0)
-        let addTagsButtonFrame = CGRect(x: 0.0, y: 0.0, width: (view.bounds.width/6.9), height: 60.0)
-        let textAreaFrame = CGRect(x: 0.0, y: 0.0, width: (view.bounds.width/1.15), height: 480.0)
-        
-        addTitleButton.frame = addTitleButtonFrame
-        addTagsButton.frame = addTagsButtonFrame
-        textArea.frame = textAreaFrame
+        view.backgroundColor = .white
+                                                               
         //textArea.becomeFirstResponder() //brings up keyboard immediately
+        
+        let viewFrame = CGRect(x: 0.0, y: 0.0, width: view.bounds.width, height: 770)
+        self.view.frame  = viewFrame
+        
+        self.view.clipsToBounds = true
+        self.view.layer.cornerRadius = 20
+        self.view.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         
         setupAddTitleButton()
         setupAddTitleLabel()
@@ -54,6 +54,9 @@ class EntryView: UIViewController{
         
         view.addSubview(addTitleButton)
         
+        let addTitleButtonFrame = CGRect(x: 0.0, y: 0.0, width: (60), height: (60))
+        addTitleButton.frame = addTitleButtonFrame
+        
         setAddTitleButtonConstraints()
     }
     
@@ -65,6 +68,9 @@ class EntryView: UIViewController{
         let addIcon = UIImage(systemName: "plus", withConfiguration: iconConfig)
         addTagsButton.setImage(addIcon, for: .normal)
         addTagsButton.imageView?.tintColor = .white
+        
+        let addTagsButtonFrame = CGRect(x: 0.0, y: 0.0, width: (60), height: (60))
+        addTagsButton.frame = addTagsButtonFrame
         
         addTitleButton.translatesAutoresizingMaskIntoConstraints = false
         
@@ -111,10 +117,14 @@ class EntryView: UIViewController{
         textArea.layer.cornerRadius = 20
         textArea.layer.borderWidth = 2
         textArea.layer.borderColor = CGColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1)
+     
         
         addTitleButton.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(textArea)
+        let textAreaFrame = CGRect(x: 0.0, y: 0.0, width: (view.bounds.width/1.15), height: (480))
+        textArea.frame = textAreaFrame
+        
         setTextAreaConstraints()
     }
     
@@ -123,7 +133,7 @@ class EntryView: UIViewController{
     //width: 414 height: 896
     /// Setting constraints for the addTitleButton
     func setAddTitleButtonConstraints(){
-        addTitleButton.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: (view.bounds.height/11.2), left: 0, bottom: 0, right: 0), size: .init(width: (view.bounds.width/6.9), height: (view.bounds.width/6.9)))
+        addTitleButton.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: (view.bounds.height/11.2), left: 0, bottom: 0, right: 0), size: .init(width: (addTitleButton.frame.width), height: (addTitleButton.frame.height)))
         NSLayoutConstraint.activate([
                 addTitleButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
             ])
@@ -131,7 +141,7 @@ class EntryView: UIViewController{
     
     /// Setting constraints for the addTagsButton
     func setAddTagsButtonConstraints(){
-        addTagsButton.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: (view.bounds.width/2.07), left: 0, bottom: 0, right: 0), size: .init(width: (view.bounds.width/6.9), height: (view.bounds.width/6.9)))
+        addTagsButton.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: (view.bounds.height/4.328), left: 0, bottom: 0, right: 0), size: .init(width: (addTagsButton.frame.width), height: (addTagsButton.frame.height)))
         NSLayoutConstraint.activate([
                 addTagsButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
             ])
@@ -139,7 +149,7 @@ class EntryView: UIViewController{
     
     /// Setting constraints for the text area
     func setTextAreaConstraints(){
-        textArea.anchor(top: addTagsLabel.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 10, left: 0, bottom: 0, right: 0), size: .init(width: 360.0, height: 480.0))
+        textArea.anchor(top: addTagsLabel.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 10, left: 0, bottom: 0, right: 0), size: .init(width: view.frame.width/1.15, height: textArea.frame.height))
         NSLayoutConstraint.activate([
                 textArea.centerXAnchor.constraint(equalTo: view.centerXAnchor)
             ])

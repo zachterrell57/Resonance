@@ -36,20 +36,20 @@ class AddEntryContainer: UIViewController{
             
         }
         else if gesture.state == .changed{
-            let translation = gesture.translation(in: self.view)
+            let translation = gesture.translation(in: entryContainerView.view)
             if(translation.y > 0){
-                view.transform = CGAffineTransform(translationX: 0, y: translation.y)
+                entryContainerView.view.transform = CGAffineTransform(translationX: 0, y: translation.y)
             }
             if(translation.y >= 250){
                 print("new entry")
-                let entryViewController = EntryViewController()
+                let entryViewController:UIViewController = EntryViewController()
                 self.present(entryViewController, animated: true)
                 gesture.state = .ended
             }
         }
         else if gesture.state == .ended{
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.1, options: .curveEaseIn, animations:  {
-                self.view.transform = .identity
+                self.entryContainerView.view.transform = .identity
             })
         }
     }
