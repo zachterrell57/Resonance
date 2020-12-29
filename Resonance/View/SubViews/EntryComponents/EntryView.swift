@@ -80,6 +80,7 @@ class EntryView: UIViewController{
             }
         }
     }
+    //hsodfs
     
     func setupTitleText(){
         titleText.layer.borderColor = CGColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1)
