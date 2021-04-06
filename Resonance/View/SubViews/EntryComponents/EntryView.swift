@@ -24,14 +24,13 @@ class EntryView: UIViewController{
     override func viewDidLoad() {
         view.backgroundColor = .white
         
-        //textArea.becomeFirstResponder() //brings up keyboard immediately
-        
         let viewFrame = CGRect(x: 0.0, y: 0.0, width: view.bounds.width, height: 770)
-        self.view.frame  = viewFrame
+        self.view.frame = viewFrame
         
         self.view.clipsToBounds = true
         self.view.layer.cornerRadius = 20
         self.view.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+
         
         setupAddTitleButton()
         setupAddTitleLabel()
@@ -39,6 +38,7 @@ class EntryView: UIViewController{
         setupAddTagsButton()
         setupAddTagsLabel()
         setupTextArea()
+        //setupToolbar()
     }
     
     
@@ -66,26 +66,28 @@ class EntryView: UIViewController{
     }
     
     @objc func addTitleButtonPressed(sender: UIButton!){
-        UIView.animate(withDuration: 0.15, delay: 0, options: .curveEaseIn) {
-            self.addTitleLabel.isHidden = true
-            self.addTitleButton.transform = CGAffineTransform(scaleX: 0.001, y: 0.001)
-        } completion: { (finished: Bool) in
-            self.addTitleButton.isHidden = true
-            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
+        UIView.animate(withDuration: 0.15, delay: 0, options: .curveEaseIn) { [self] in
+            addTitleLabel.isHidden = true
+            addTitleButton.transform = CGAffineTransform(scaleX: 0.001, y: 0.001)
+        } completion: { [self] (finished: Bool) in
+            addTitleButton.isHidden = true
+            UIView.animate(withDuration: 0.15, delay: 0, options: .curveEaseOut) {
                 DispatchQueue.main.async {
-                    self.titleText.isHidden = false
+                    titleText.isHidden = false
                 }
-                self.titleText.transform = CGAffineTransform(scaleX: 1, y: 1)
-                self.titleText.becomeFirstResponder()
+                titleText.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                titleText.becomeFirstResponder()
             }
         }
     }
-    //hsodfs
-    
+        
     func setupTitleText(){
         titleText.layer.borderColor = CGColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1)
         titleText.layer.borderWidth = 2
         titleText.layer.cornerRadius = 20
+
+        titleText.textAlignment = .center
+        titleText.font = .systemFont(ofSize: 24)
         
         let frame = CGRect(x: 0.0, y: 0.0, width: 360.0, height: 52.0)
         titleText.frame = frame
@@ -94,8 +96,45 @@ class EntryView: UIViewController{
         
         setTitleTextConstraints()
         
-        self.titleText.transform = CGAffineTransform(scaleX: 0.001, y: 0.001)
+        self.titleText.transform = CGAffineTransform(scaleX: 0.001, y: 1)
         titleText.isHidden = true
+        
+        let dismissTap = UITapGestureRecognizer(target: self, action: #selector(dismissClick(_:)))
+        dismissTap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(dismissTap)
+    }
+    
+    @objc func dismissClick(_ gesture: UITapGestureRecognizer){
+        
+        //called from titleText
+        if titleText.isEditing{
+            titleText.endEditing(true) // dismiss keyboard
+            // user clicks away from titleText after entering a title
+            if titleText.hasText{
+                titleText.layer.borderWidth = 0
+            }
+        }
+        
+        // called from textArea
+        if textArea.isFirstResponder{
+            textArea.endEditing(true)
+        }
+      
+        //user clicks away from titleText without entering a title __NOT IMPLEMENTED__
+//        else if(!titleText.hasText){
+//            UIView.animate(withDuration: 0.15, delay: 0, options: .curveEaseIn) { [self] in
+//                addTitleLabel.isHidden = false
+//                titleText.transform = CGAffineTransform(scaleX: 0.001, y: 1)
+//            } completion: { [self] (finished: Bool) in
+//                addTitleButton.isHidden = false
+//                UIView.animate(withDuration: 0.15, delay: 0, options: .curveEaseOut) {
+//                    DispatchQueue.main.async {
+//                        titleText.isHidden = true
+//                    }
+//                    addTitleButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+//                }
+//            }
+//        }
     }
     
     func setupAddTagsButton(){
@@ -164,7 +203,23 @@ class EntryView: UIViewController{
         textArea.frame = textAreaFrame
         
         setTextAreaConstraints()
+        
+        let dismissTap = UITapGestureRecognizer(target: self, action: #selector(dismissClick(_:)))
+        dismissTap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(dismissTap)
     }
+    
+//    func setupToolbar(){
+//        let toolbar: UIToolbar = UIToolbar()
+//        let camera = UIBarButtonItem(title: "Camera", style: .plain, target: self, action: #selector(cameraButtonPressed))
+//        toolbar.items = [camera]
+//        toolbar.sizeToFit()
+//        textArea.inputAccessoryView = toolbar
+//    }
+//
+//    @objc func cameraButtonPressed(){
+//
+//    }
     
     
     //MARK: Constraints
@@ -216,3 +271,4 @@ class EntryView: UIViewController{
         ])
     }
 }
+

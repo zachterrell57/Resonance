@@ -17,6 +17,7 @@
 		2E313CC724C3797B00E2674C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E313CC524C3797B00E2674C /* LaunchScreen.storyboard */; };
 		2E4372DB24DF682F007DF32B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4372DA24DF682F007DF32B /* Extensions.swift */; };
 		2E4372DD24E08E84007DF32B /* TopNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4372DC24E08E84007DF32B /* TopNavigation.swift */; };
+		2E4721A725CFA43900A108CE /* EntryToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4721A625CFA43900A108CE /* EntryToolbar.swift */; };
 		2E5017F22504544A00724084 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5017F12504544A00724084 /* DayView.swift */; };
 		2EC0088B258EF63D00F4FD8B /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC0088A258EF63D00F4FD8B /* EntryViewController.swift */; };
 		2ED0AB8D25217DF30046742A /* MonthHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED0AB8C25217DF30046742A /* MonthHeaderView.swift */; };
@@ -41,6 +42,7 @@
 		2E313CC824C3797B00E2674C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E4372DA24DF682F007DF32B /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		2E4372DC24E08E84007DF32B /* TopNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigation.swift; sourceTree = "<group>"; };
+		2E4721A625CFA43900A108CE /* EntryToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryToolbar.swift; sourceTree = "<group>"; };
 		2E5017F12504544A00724084 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		2EC0088A258EF63D00F4FD8B /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
 		2ED0AB8C25217DF30046742A /* MonthHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthHeaderView.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				2E313CC324C3797B00E2674C /* Assets.xcassets */,
 				2E313CC524C3797B00E2674C /* LaunchScreen.storyboard */,
 				2E313CC824C3797B00E2674C /* Info.plist */,
+				2E4721A625CFA43900A108CE /* EntryToolbar.swift */,
 			);
 			path = Resonance;
 			sourceTree = "<group>";
@@ -326,6 +329,7 @@
 				2E4372DD24E08E84007DF32B /* TopNavigation.swift in Sources */,
 				2EEF1DBE2504151900C956A7 /* TodayEntryContainerView.swift in Sources */,
 				2E202335258AF02800CD5ACF /* EntryView.swift in Sources */,
+				2E4721A725CFA43900A108CE /* EntryToolbar.swift in Sources */,
 				2ED95C9224C767ED003C598B /* CalendarViewController.swift in Sources */,
 				2E2023312589CF2E00CD5ACF /* AddEntryContainer.swift in Sources */,
 				2E20BB4624EB860C00977412 /* EntriesOnDay.swift in Sources */,

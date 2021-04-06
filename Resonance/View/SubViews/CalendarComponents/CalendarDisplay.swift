@@ -15,7 +15,7 @@ class CalendarDisplay: UIViewController {
     private lazy var calendarView = CalendarView(initialContent: makeContent())
     private lazy var calendar = Calendar(identifier: .gregorian)
     private lazy var monthWidth = (view.frame.width - 30)
-    private lazy var monthsLayout = MonthsLayout.horizontal(monthWidth: monthWidth)
+    private lazy var monthsLayout = MonthsLayout.horizontal(options: HorizontalMonthsLayoutOptions(maximumFullyVisibleMonths: 1, scrollingBehavior: .paginatedScrolling(HorizontalMonthsLayoutOptions.PaginationConfiguration(restingPosition: .atIncrementsOfCalendarWidth, restingAffinity: .atPositionsClosestToTargetOffset))))
     
     private var selectedDay: Day?
     
@@ -31,6 +31,7 @@ class CalendarDisplay: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(view.bounds.width - monthWidth)
         
         if #available(iOS 13.0, *) {
             view.backgroundColor = .systemBackground
@@ -40,6 +41,15 @@ class CalendarDisplay: UIViewController {
         
         view.addSubview(calendarView)
         calendarView.backgroundColor = .clear
+        
+        calendarView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+          calendarView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+          calendarView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+          calendarView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+          calendarView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
+        ])
         
         setCalendarConstraints(calendarView: calendarView)           
     }
@@ -52,8 +62,8 @@ class CalendarDisplay: UIViewController {
         dateFormatter.calendar = calendar
         dateFormatter.dateFormat = "MMMM yyyy"
         
-        let startDate = calendar.date(from: DateComponents(year: 2020, month: 01, day: 16))!
-        let endDate = calendar.date(from: DateComponents(year: 2020, month: 12, day: 05))!
+        let startDate = Date()
+        let endDate = Date()
         let selectedDay = self.selectedDay
         
         return CalendarViewContent(
@@ -117,6 +127,9 @@ class CalendarDisplay: UIViewController {
                     invariantViewProperties: .init(textColor: textColor, isSelectedStyle: day == selectedDay),
                     viewModel: .init(dayText: "\(day.day)", dayAccessibilityText: dayAccessibilityText))
             }
+        
+            //basically margins
+            .withInterMonthSpacing((view.bounds.width - monthWidth) / 2)
     }
     
     func setCalendarConstraints(calendarView: CalendarView){
@@ -136,16 +149,7 @@ class CalendarDisplay: UIViewController {
         super.viewWillLayoutSubviews()
         
         calendarView.insetsLayoutMarginsFromSafeArea = false
-        
-        if case .horizontal(let monthWidth) = monthsLayout {
-            let marginSize = (view.bounds.width - monthWidth) / 2
-            calendarView.layoutMargins.left = (marginSize)
-            calendarView.layoutMargins.right = (marginSize)
-            calendarView.layoutMargins.top = (marginSize / 1.6)
-            calendarView.layoutMargins.bottom = 0
-            
-            calendarView.setContent(makeContent().withInterMonthSpacing(marginSize))                        
-        }
+    
     }
 }
 

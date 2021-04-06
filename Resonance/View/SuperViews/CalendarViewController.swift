@@ -80,6 +80,7 @@ class CalendarViewController: UIViewController{
     func setCalendarDisplayConstraints(){
         let height = view.frame.width * 1.08
         let width = view.frame.width
+        print(width)
         calendarDisplay.anchor(top: topNavigation.view.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0), size: .init(width: width, height: height))
     }
     
