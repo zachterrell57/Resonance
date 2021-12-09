@@ -21,6 +21,8 @@
 		2E5017F22504544A00724084 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5017F12504544A00724084 /* DayView.swift */; };
 		2EC0088B258EF63D00F4FD8B /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC0088A258EF63D00F4FD8B /* EntryViewController.swift */; };
 		2ED0AB8D25217DF30046742A /* MonthHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED0AB8C25217DF30046742A /* MonthHeaderView.swift */; };
+		2ED2466F271DFAF400CF5DF8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2ED2466E271DFAF400CF5DF8 /* GoogleService-Info.plist */; };
+		2ED24673271DFDE300CF5DF8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED24672271DFDE300CF5DF8 /* LoginViewController.swift */; };
 		2ED6828225201383008E9017 /* DayOfWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED6828125201383008E9017 /* DayOfWeekView.swift */; };
 		2ED95C9224C767ED003C598B /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED95C9124C767ED003C598B /* CalendarViewController.swift */; };
 		2EDD26F124ECAE4400653193 /* CustomCellSmall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDD26F024ECAE4400653193 /* CustomCellSmall.swift */; };
@@ -46,6 +48,8 @@
 		2E5017F12504544A00724084 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		2EC0088A258EF63D00F4FD8B /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
 		2ED0AB8C25217DF30046742A /* MonthHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthHeaderView.swift; sourceTree = "<group>"; };
+		2ED2466E271DFAF400CF5DF8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2ED24672271DFDE300CF5DF8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2ED6828125201383008E9017 /* DayOfWeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekView.swift; sourceTree = "<group>"; };
 		2ED95C9124C767ED003C598B /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		2EDD26F024ECAE4400653193 /* CustomCellSmall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCellSmall.swift; sourceTree = "<group>"; };
@@ -92,6 +96,7 @@
 			children = (
 				2ED95C9124C767ED003C598B /* CalendarViewController.swift */,
 				2EC0088A258EF63D00F4FD8B /* EntryViewController.swift */,
+				2ED24672271DFDE300CF5DF8 /* LoginViewController.swift */,
 			);
 			path = SuperViews;
 			sourceTree = "<group>";
@@ -137,6 +142,7 @@
 				2E313CC324C3797B00E2674C /* Assets.xcassets */,
 				2E313CC524C3797B00E2674C /* LaunchScreen.storyboard */,
 				2E313CC824C3797B00E2674C /* Info.plist */,
+				2ED2466E271DFAF400CF5DF8 /* GoogleService-Info.plist */,
 				2E4721A625CFA43900A108CE /* EntryToolbar.swift */,
 			);
 			path = Resonance;
@@ -264,6 +270,7 @@
 			files = (
 				2E313CC724C3797B00E2674C /* LaunchScreen.storyboard in Resources */,
 				2E313CC424C3797B00E2674C /* Assets.xcassets in Resources */,
+				2ED2466F271DFAF400CF5DF8 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +323,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2ED24673271DFDE300CF5DF8 /* LoginViewController.swift in Sources */,
 				2EEF1DBC250413FB00C956A7 /* EntriesOnDayHeader.swift in Sources */,
 				2E5017F22504544A00724084 /* DayView.swift in Sources */,
 				2E4372DB24DF682F007DF32B /* Extensions.swift in Sources */,
