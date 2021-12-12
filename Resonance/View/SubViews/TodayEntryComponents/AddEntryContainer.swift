@@ -10,6 +10,8 @@ import Foundation
 
 import Foundation
 import UIKit
+import Firebase
+import FirebaseAuth
 
 class AddEntryContainer: UIViewController{
     

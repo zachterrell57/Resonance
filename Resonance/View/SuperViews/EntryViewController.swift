@@ -8,16 +8,25 @@
 
 import Foundation
 import UIKit
+import FirebaseDatabase
+import FirebaseAuth
 
 class EntryViewController: UIViewController{
     
-    let entryView = EntryView()
+    var ref: DatabaseReference!
+    var user: String!
+
+    var entryView: EntryView!
     
     let addLabel = UILabel()
     let gestureArea = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ref = Database.database().reference()
+        user = FirebaseAuth.Auth.auth().currentUser!.uid
+        entryView = EntryView()
         
         self.view.backgroundColor = #colorLiteral(red: 0.2349999994, green: 0.8309999704, blue: 0.5609999895, alpha: 1)
         self.view.layer.cornerRadius = 20
@@ -27,7 +36,12 @@ class EntryViewController: UIViewController{
         loadAddSwipe()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        print("view did appear")
+    }
+    
     @objc func gestureFired(_ gesture: UIPanGestureRecognizer){
+        
         if gesture.state == .began{
             
         }
@@ -39,6 +53,7 @@ class EntryViewController: UIViewController{
             
             if(translation.y <= -200){
                 print("entry added")
+                
                 UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.1, options: .curveEaseIn, animations:  {
                     self.view.center.y = -400
                             })
@@ -50,8 +65,29 @@ class EntryViewController: UIViewController{
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.1, options: .curveEaseIn, animations:  {
                 self.entryView.view.transform = .identity
             })
+            
+            sendToDatabase()
         }
         
+    }
+    
+    func sendToDatabase(){
+        var title: String!
+        print("title text:" + entryView.titleText.text!)
+        if ((entryView.titleText.text) == ""){
+            let date = Date()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMM d, h:mm a"
+            print(dateFormatter.string(from: date))
+            title = dateFormatter.string(from: date)
+        }
+        else{
+            title = entryView.titleText.text
+        }
+        guard let text = entryView.textArea.text else {return}
+        let path = self.ref.child("users/" + self.user + "/entries/" + title)
+
+        path.setValue(["text": text])
     }
     
     func loadAddSwipe(){
@@ -82,6 +118,8 @@ class EntryViewController: UIViewController{
 
         addLabel.anchor(top: nil, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 0, bottom: -50, right: 0), size: .zero)
     }
+    
+    //MARK: Constraints
     
     func setGestureAreaConstraints(){
         gestureArea.anchor(top: entryView.view.bottomAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .zero, size: .zero)

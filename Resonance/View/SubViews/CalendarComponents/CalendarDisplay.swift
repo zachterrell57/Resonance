@@ -9,6 +9,7 @@
 import UIKit
 import HorizonCalendar
 import Foundation
+import FirebaseAuth
 
 class CalendarDisplay: UIViewController {
     
@@ -51,7 +52,7 @@ class CalendarDisplay: UIViewController {
           calendarView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
         ])
         
-        setCalendarConstraints(calendarView: calendarView)           
+        setCalendarConstraints(calendarView: calendarView)
     }
     
     /// Creates fully functioning calendar with custom elements

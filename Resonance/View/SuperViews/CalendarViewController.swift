@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import HorizonCalendar
+import FirebaseAuth
 
 class CalendarViewController: UIViewController{
     
@@ -28,6 +29,14 @@ class CalendarViewController: UIViewController{
         loadTopNavigation()
         loadCalendarDisplay()
         loadAddEntryContainer()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if FirebaseAuth.Auth.auth().currentUser == nil{
+            let loginViewController: UIViewController = LoginViewController()
+            self.present(loginViewController, animated: true)
+            loginViewController.isModalInPresentation = true
+        }
     }
 
     

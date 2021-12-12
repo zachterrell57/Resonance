@@ -8,18 +8,19 @@
 
 import Foundation
 import UIKit
+import FirebaseFirestore
 
 class EntryView: UIViewController{
     
     private let addTitleButton = UIButton()
     private let addTitleLabel = UILabel()
     
-    private let titleText = UITextField()
+    private(set) var titleText = UITextField()
     
     private let addTagsButton = UIButton()
     private let addTagsLabel = UILabel()
     
-    private let textArea = UITextView()
+    private(set) var textArea = UITextView()
     
     override func viewDidLoad() {
         view.backgroundColor = .white
