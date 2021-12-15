@@ -22,11 +22,9 @@ class EntriesOnDayHeader: UIViewController{
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMMM d"
-        let date = Date()
-        
         label.font = UIFont.systemFont(ofSize: 24)
         
-        label.text = "Notes From \(dateFormatter.string(from: date))"
+        label.text = "Notes From \(dateFormatter.string(from: Repository.shared.selectedDate!))"
         
         view.addSubview(label)
         

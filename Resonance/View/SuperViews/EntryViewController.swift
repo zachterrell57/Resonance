@@ -11,7 +11,7 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 
-class EntryViewController: UIViewController{
+class EntryViewController: UIViewController, UIAdaptivePresentationControllerDelegate{
     
     var ref: DatabaseReference!
     var user: String!
@@ -36,12 +36,12 @@ class EntryViewController: UIViewController{
         loadAddSwipe()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        print("view did appear")
+    
+    func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
+            refreshParent()
     }
     
     @objc func gestureFired(_ gesture: UIPanGestureRecognizer){
-        
         if gesture.state == .began{
             
         }
@@ -52,12 +52,14 @@ class EntryViewController: UIViewController{
             }
             
             if(translation.y <= -200){
-                print("entry added")
-                
                 UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.1, options: .curveEaseIn, animations:  {
                     self.view.center.y = -400
                             })
                 gesture.state = .ended
+                
+                //send info to database after animation
+                sendToDatabase()
+                refreshParent()
                 self.dismiss(animated: false, completion: nil)
             }
         }
@@ -65,29 +67,44 @@ class EntryViewController: UIViewController{
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.1, options: .curveEaseIn, animations:  {
                 self.entryView.view.transform = .identity
             })
-            
-            sendToDatabase()
         }
-        
+    }
+    
+    func refreshParent(){
+        self.beginAppearanceTransition(false, animated: true)
+        self.presentingViewController?.beginAppearanceTransition(true, animated: true)
+        self.endAppearanceTransition()
+        self.presentingViewController?.endAppearanceTransition()
     }
     
     func sendToDatabase(){
+        //unique identifier for every entry
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM-dd-yyyy HH:mm:ss:mm"
+        let entryUID = dateFormatter.string(from: date)
+
+        //if user doesn't enter title, title becomes current date
         var title: String!
-        print("title text:" + entryView.titleText.text!)
         if ((entryView.titleText.text) == ""){
             let date = Date()
             let dateFormatter = DateFormatter()
+            dateFormatter.timeZone = TimeZone.current
             dateFormatter.dateFormat = "MMM d, h:mm a"
-            print(dateFormatter.string(from: date))
             title = dateFormatter.string(from: date)
         }
         else{
             title = entryView.titleText.text
         }
+        
+        //save entry text
         guard let text = entryView.textArea.text else {return}
-        let path = self.ref.child("users/" + self.user + "/entries/" + title)
-
-        path.setValue(["text": text])
+        
+        //database path to save the entries
+        let path = self.ref.child("users/" + self.user + "/entries/" + entryUID)
+        
+        //set value of title and text of entry
+        path.setValue(["uid": entryUID, "title": title, "text": text])
     }
     
     func loadAddSwipe(){
@@ -129,3 +146,14 @@ class EntryViewController: UIViewController{
         entryView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .zero, size: .init(width: entryView.view.frame.width, height: entryView.view.frame.height))
     }
 }
+
+//extension EntryViewController: UIAdaptivePresentationControllerDelegate{ func presentationControllerDidDismiss(_ presentationController: UIPresentationController){
+//    self.beginAppearanceTransition(false, animated: true)
+//    self.presentingViewController?.beginAppearanceTransition(true, animated: true)
+//    self.endAppearanceTransition()
+//    self.presentingViewController?.endAppearanceTransition()
+//
+//    print("dismissed")
+//    }
+//}
+

@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 
@@ -28,9 +27,6 @@ class LoginViewController: UIViewController{
         
         // Do any additional setup after loading the view.
         view.backgroundColor = .white
-        
-        ref = Database.database().reference()
-        
        
         loadEmailField()
         loadPasswordField()
@@ -39,6 +35,10 @@ class LoginViewController: UIViewController{
         loadEmailLabel()
         loadSignInButton()
         loadCreateAccountButton()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        ref = Database.database().reference()
     }
     
     func loadEmailLabel(){
@@ -120,8 +120,6 @@ class LoginViewController: UIViewController{
     
     
     @objc func signInButtonAction(sender: UIButton!) {
-        print("Sign In Button Tapped")
-        
         guard let email = emailField.text else { return}
         guard let password = passwordField.text else { return}
 
@@ -138,8 +136,6 @@ class LoginViewController: UIViewController{
     }
 
     func loadCreateAccountButton() {
-        print("Sign In Button Tapped")
-        
         createAccountButton.backgroundColor = .black
         
         view.addSubview(createAccountButton)

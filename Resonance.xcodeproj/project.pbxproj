@@ -26,6 +26,9 @@
 		2ED6828225201383008E9017 /* DayOfWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED6828125201383008E9017 /* DayOfWeekView.swift */; };
 		2ED95C9224C767ED003C598B /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED95C9124C767ED003C598B /* CalendarViewController.swift */; };
 		2EDD26F124ECAE4400653193 /* CustomCellSmall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDD26F024ECAE4400653193 /* CustomCellSmall.swift */; };
+		2EEA797D2766C2870042226B /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EEA797C2766C2870042226B /* Entry.swift */; };
+		2EEA797F276A70D90042226B /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EEA797E276A70D90042226B /* Repository.swift */; };
+		2EEA7981276A848E0042226B /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EEA7980276A848E0042226B /* TodayViewController.swift */; };
 		2EEF1DBC250413FB00C956A7 /* EntriesOnDayHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EEF1DBB250413FB00C956A7 /* EntriesOnDayHeader.swift */; };
 		2EEF1DBE2504151900C956A7 /* TodayEntryContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EEF1DBD2504151900C956A7 /* TodayEntryContainerView.swift */; };
 		DED73D9E5424489CBAF2228A /* Pods_Resonance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34F246A69B4CE65E4CD909F2 /* Pods_Resonance.framework */; };
@@ -53,6 +56,9 @@
 		2ED6828125201383008E9017 /* DayOfWeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekView.swift; sourceTree = "<group>"; };
 		2ED95C9124C767ED003C598B /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		2EDD26F024ECAE4400653193 /* CustomCellSmall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCellSmall.swift; sourceTree = "<group>"; };
+		2EEA797C2766C2870042226B /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
+		2EEA797E276A70D90042226B /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		2EEA7980276A848E0042226B /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		2EEF1DBB250413FB00C956A7 /* EntriesOnDayHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesOnDayHeader.swift; sourceTree = "<group>"; };
 		2EEF1DBD2504151900C956A7 /* TodayEntryContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayEntryContainerView.swift; sourceTree = "<group>"; };
 		34F246A69B4CE65E4CD909F2 /* Pods_Resonance.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Resonance.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,6 +103,7 @@
 				2ED95C9124C767ED003C598B /* CalendarViewController.swift */,
 				2EC0088A258EF63D00F4FD8B /* EntryViewController.swift */,
 				2ED24672271DFDE300CF5DF8 /* LoginViewController.swift */,
+				2EEA7980276A848E0042226B /* TodayViewController.swift */,
 			);
 			path = SuperViews;
 			sourceTree = "<group>";
@@ -144,6 +151,7 @@
 				2E313CC824C3797B00E2674C /* Info.plist */,
 				2ED2466E271DFAF400CF5DF8 /* GoogleService-Info.plist */,
 				2E4721A625CFA43900A108CE /* EntryToolbar.swift */,
+				2EEA797E276A70D90042226B /* Repository.swift */,
 			);
 			path = Resonance;
 			sourceTree = "<group>";
@@ -151,6 +159,7 @@
 		2E313CCE24C37E1F00E2674C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2EEA797C2766C2870042226B /* Entry.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -326,9 +335,12 @@
 				2ED24673271DFDE300CF5DF8 /* LoginViewController.swift in Sources */,
 				2EEF1DBC250413FB00C956A7 /* EntriesOnDayHeader.swift in Sources */,
 				2E5017F22504544A00724084 /* DayView.swift in Sources */,
+				2EEA797D2766C2870042226B /* Entry.swift in Sources */,
 				2E4372DB24DF682F007DF32B /* Extensions.swift in Sources */,
 				2E313CBF24C3797900E2674C /* CalendarDisplay.swift in Sources */,
 				2ED6828225201383008E9017 /* DayOfWeekView.swift in Sources */,
+				2EEA797F276A70D90042226B /* Repository.swift in Sources */,
+				2EEA7981276A848E0042226B /* TodayViewController.swift in Sources */,
 				2EC0088B258EF63D00F4FD8B /* EntryViewController.swift in Sources */,
 				2E313CBB24C3797900E2674C /* AppDelegate.swift in Sources */,
 				2ED0AB8D25217DF30046742A /* MonthHeaderView.swift in Sources */,

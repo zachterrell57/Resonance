@@ -12,13 +12,10 @@ import Foundation
 import FirebaseAuth
 
 class CalendarDisplay: UIViewController {
-    
     private lazy var calendarView = CalendarView(initialContent: makeContent())
     private lazy var calendar = Calendar(identifier: .gregorian)
     private lazy var monthWidth = (view.frame.width - 30)
     private lazy var monthsLayout = MonthsLayout.horizontal(options: HorizontalMonthsLayoutOptions(maximumFullyVisibleMonths: 1, scrollingBehavior: .paginatedScrolling(HorizontalMonthsLayoutOptions.PaginationConfiguration(restingPosition: .atIncrementsOfCalendarWidth, restingAffinity: .atPositionsClosestToTargetOffset))))
-    
-    private var selectedDay: Day?
     
     private lazy var dayDateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -30,6 +27,8 @@ class CalendarDisplay: UIViewController {
         return dateFormatter
     }()
     
+    var parentVC: CalendarViewController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print(view.bounds.width - monthWidth)
@@ -40,8 +39,33 @@ class CalendarDisplay: UIViewController {
             view.backgroundColor = .white
         }
         
+        //initially sets selected day to current day
+        let todayDate = Date()
+        let components = self.calendar.dateComponents([.year, .month, .day], from: todayDate)
+        Repository.shared.selectedDate = self.calendar.date(from: components)
+        
+        
         view.addSubview(calendarView)
         calendarView.backgroundColor = .clear
+        
+        
+        calendarView.daySelectionHandler = { [weak self] day in
+              guard let self = self else { return }
+            
+            //sets selected day to day tapped
+            Repository.shared.selectedDate = self.calendar.date(from: day.components)            
+            self.calendarView.setContent(self.makeContent())
+            
+            //refresh entries for selected day
+            self.parentVC.refreshEntries()
+            
+              if UIAccessibility.isVoiceOverRunning, let selectedDate = Repository.shared.selectedDate {
+                self.calendarView.layoutIfNeeded()
+                let accessibilityElementToFocus = self.calendarView.accessibilityElementForVisibleDate(
+                  selectedDate)
+                UIAccessibility.post(notification: .screenChanged, argument: accessibilityElementToFocus)
+              }
+            }
         
         calendarView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -65,7 +89,7 @@ class CalendarDisplay: UIViewController {
         
         let startDate = Date()
         let endDate = Date()
-        let selectedDay = self.selectedDay
+        let selectedDate = Repository.shared.selectedDate
         
         return CalendarViewContent(
             calendar: calendar,
@@ -109,25 +133,25 @@ class CalendarDisplay: UIViewController {
                   viewModel: .init(dayText: dayOfWeekText, dayAccessibilityText: nil))
             }
             
-            .withDayItemModelProvider { [weak self] day in
-                let textColor: UIColor
-                if #available(iOS 13.0, *) {
-                    textColor = .label
-                } else {
-                    textColor = .black
-                }
+            .withDayItemModelProvider { [calendar, dayDateFormatter] day in
+              var invariantViewProperties = DayView.InvariantViewProperties.baseInteractive
 
-                let dayAccessibilityText: String?
-                if let date = self?.calendar.date(from: day.components) {
-                    dayAccessibilityText = self?.dayDateFormatter.string(from: date)
-                } else {
-                    dayAccessibilityText = nil
-                }
+              let date = calendar.date(from: day.components)
+                
+              if date == selectedDate {
+                  invariantViewProperties.backgroundColor = .black
+                  invariantViewProperties.textColor = .white
+                  invariantViewProperties.cornerRadius = 25.0
+              }
 
-                return CalendarItemModel<DayView>(
-                    invariantViewProperties: .init(textColor: textColor, isSelectedStyle: day == selectedDay),
-                    viewModel: .init(dayText: "\(day.day)", dayAccessibilityText: dayAccessibilityText))
+              return CalendarItemModel<DayView>(
+                invariantViewProperties: invariantViewProperties,
+                viewModel: .init(
+                  dayText: "\(day.day)",
+                  accessibilityLabel: date.map { dayDateFormatter.string(from: $0) },
+                  accessibilityHint: nil))
             }
+            
         
             //basically margins
             .withInterMonthSpacing((view.bounds.width - monthWidth) / 2)
@@ -135,8 +159,7 @@ class CalendarDisplay: UIViewController {
     
     func setCalendarConstraints(calendarView: CalendarView){
         
-        calendarView.translatesAutoresizingMaskIntoConstraints = false                
-        
+        calendarView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
                 calendarView.centerYAnchor.constraint(equalTo: view.layoutMarginsGuide.centerYAnchor),
                 calendarView.heightAnchor.constraint(equalToConstant: monthWidth * 1.1),

@@ -8,8 +8,15 @@
 
 import Foundation
 import UIKit
+import FirebaseDatabase
+import FirebaseAuth
 
 class EntriesOnDay: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    
+    var ref: DatabaseReference!
+    
+    //array storing the entries from today
+    var entriesOnDay = [Entry]()
     
     let cellID: String = "cellId"
     let headerID: String = "headerID"
@@ -28,19 +35,66 @@ class EntriesOnDay: UIViewController, UICollectionViewDelegate, UICollectionView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(collectionView)
-        
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.backgroundColor = .white
-        
-        setCollectionViewConstraints()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        //reloads data everytime view appears
+        retrieveData()
+    }
+    
+    func retrieveData(){
+        let user = FirebaseAuth.Auth.auth().currentUser
+        if(!(FirebaseAuth.Auth.auth().currentUser == nil)){
+            let uid = user!.uid
+            //reference to user's entries in database
+            ref = Database.database().reference().child("users/" + uid + "/entries/")
+            
+            //opens up observer to path
+            self.ref.observe(.value, with: { (snapshot) in
+                
+                //reset entriesOnDay
+                self.entriesOnDay.removeAll()
+                                
+                //for every entry
+                for child in snapshot.children{
+                    let entry = child as! DataSnapshot
+                    if let entryFields = entry.value as? [String: Any]{
+                        let uid =  entry.key
+                        let title = entryFields["title"] as? String ?? ""
+                        let text = entryFields["text"] as? String ?? ""
+                        
+                        //save current date as Date type
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "MM-dd-yyyy HH:mm:ss:mm"
+                        dateFormatter.timeZone = TimeZone.current
+                        let uidAsDate = dateFormatter.date(from: uid)
+                        
+                        //check if current date and note date are equal
+                        if Calendar.current.isDate(uidAsDate!, equalTo: Repository.shared.selectedDate!, toGranularity: .day){
+                            //add to entriesOnDay
+                            self.entriesOnDay.append(.init(
+                                uid: uid,
+                                title: title,
+                                text: text
+                            ))
+                        }
+                    }
+                }
+                
+                self.view.addSubview(self.collectionView)
+                self.collectionView.dataSource = self
+                self.collectionView.delegate = self
+                self.collectionView.backgroundColor = .white
+                self.collectionView.reloadData()
+                
+                self.setCollectionViewConstraints()
+            })
+        }
     }
         
     //MARK: Collectionview Section
-    let array = ["cat", "hat", "car", "bar"]
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return array.count
+        return entriesOnDay.count    
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

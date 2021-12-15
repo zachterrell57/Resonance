@@ -17,28 +17,33 @@ class CalendarViewController: UIViewController{
     
     let calendarDisplay = CalendarDisplay()
     let topNavigation = TopNavigation()
-    let addEntryContainer = AddEntryContainer()
     
-    //let layout = UICollectionViewLayout().init()
-    //let notesFromToday = NotesOnDay()
-    
+    let user = Auth.auth().currentUser
     
     override func viewDidLoad() {
         view.backgroundColor = .white
         
-        loadTopNavigation()
-        loadCalendarDisplay()
-        loadAddEntryContainer()
+        calendarDisplay.parentVC = self
+        
+        DispatchQueue.main.async {
+            self.loadTopNavigation()
+            self.loadCalendarDisplay()
+            self.refreshEntries()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if FirebaseAuth.Auth.auth().currentUser == nil{
+        if user == nil{
             let loginViewController: UIViewController = LoginViewController()
-            self.present(loginViewController, animated: true)
+            self.present(loginViewController, animated: true, completion: nil)
             loginViewController.isModalInPresentation = true
         }
     }
-
+    
+    //Abstracted so it can be called from Calendar Display
+    func refreshEntries(){
+        self.loadAddEntryContainer()
+    }
     
     // MARK: Load elements
     
@@ -63,6 +68,9 @@ class CalendarViewController: UIViewController{
     }
     
     func loadAddEntryContainer(){
+        //gets fresh entry view every time
+        let addEntryContainer = AddEntryContainer()
+        
         addChild(addEntryContainer)
         view.addSubview(addEntryContainer.view)
         addEntryContainer.didMove(toParent: self)
@@ -70,7 +78,7 @@ class CalendarViewController: UIViewController{
         addEntryContainer.view.backgroundColor = #colorLiteral(red: 0.2349999994, green: 0.8309999704, blue: 0.5609999895, alpha: 1)
         addEntryContainer.view.layer.cornerRadius = 20
         
-        setAddEntryContainerConstraints()
+        setAddEntryContainerConstraints(addEntryContainer: addEntryContainer)
     }
         
         
@@ -93,9 +101,7 @@ class CalendarViewController: UIViewController{
         calendarDisplay.anchor(top: topNavigation.view.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0), size: .init(width: width, height: height))
     }
     
-    func setAddEntryContainerConstraints(){
+    func setAddEntryContainerConstraints(addEntryContainer: AddEntryContainer){
         addEntryContainer.anchor(top: nil, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .zero, size: .init(width: view.frame.width, height: (view.frame.height/2.15)))        
     }
 }
-
-

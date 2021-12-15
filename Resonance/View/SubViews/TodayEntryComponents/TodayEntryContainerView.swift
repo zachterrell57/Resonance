@@ -12,20 +12,20 @@ import UIKit
 class TodayEntryContainerView: UIViewController{
     
     let entriesOnDay = EntriesOnDay()
-    let entryHeader = EntriesOnDayHeader()
+    let entriesOnDayHeader = EntriesOnDayHeader()
     
     override func viewDidLoad(){
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        loadEntryHeader()
+        loadEntriesOnDayHeader()
         loadEntriesOnDay()
     }
     
-    func loadEntryHeader(){
-        addChild(entryHeader)
-        view.addSubview(entryHeader.view)
-        entryHeader.didMove(toParent: self)
+    func loadEntriesOnDayHeader(){
+        addChild(entriesOnDayHeader)
+        view.addSubview(entriesOnDayHeader.view)
+        entriesOnDayHeader.didMove(toParent: self)
         
         setEntryHeaderConstraints()
     }
@@ -39,10 +39,10 @@ class TodayEntryContainerView: UIViewController{
     }
     
     func setEntryHeaderConstraints(){
-        entryHeader.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 5, left: 24, bottom: 0, right: 0), size: .init(width: view.frame.width, height: 40))
+        entriesOnDayHeader.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 5, left: 24, bottom: 0, right: 0), size: .init(width: view.frame.width, height: 40))
     }
     
     func setEntriesOnDayConstraints(){
-        entriesOnDay.anchor(top: entryHeader.view.bottomAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .zero, size: .zero)
+        entriesOnDay.anchor(top: entriesOnDayHeader.view.bottomAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .zero, size: .zero)
     }
 }

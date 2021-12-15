@@ -33,6 +33,10 @@ class AddEntryContainer: UIViewController{
         loadEntryContainerView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        loadEntryContainerView()
+    }
+    
     @objc func gestureFired(_ gesture: UIPanGestureRecognizer){
         if gesture.state == .began{
             
@@ -43,9 +47,9 @@ class AddEntryContainer: UIViewController{
                 entryContainerView.view.transform = CGAffineTransform(translationX: 0, y: translation.y)
             }
             if(translation.y >= 250){
-                print("new entry")
-                let entryViewController:UIViewController = EntryViewController()
+                let entryViewController = EntryViewController()
                 self.present(entryViewController, animated: true)
+                entryViewController.presentationController?.delegate = entryViewController as UIAdaptivePresentationControllerDelegate
                 gesture.state = .ended
             }
         }
@@ -94,5 +98,4 @@ class AddEntryContainer: UIViewController{
     func setEntryViewConstraints(){
         entryContainerView.anchor(top: nil, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .zero, size: .init(width: view.frame.width, height: (view.frame.height * 0.87)))
     }
-    
 }

@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +16,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        
+        //deletes session if user has been deleted on dashboard
+        let user = Auth.auth().currentUser
+        user?.getIDTokenForcingRefresh(true, completion: { (idToken, error) in
+            if error != nil{
+                do{
+                    try Auth.auth().signOut()
+                }
+                catch{
+                    print("was not able to sign out")
+                }
+            }
+        })
+        
         return true
     }
 
