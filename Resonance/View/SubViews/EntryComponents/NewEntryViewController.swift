@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import FirebaseFirestore
 
-class EntryView: UIViewController{
+class NewEntryViewController: UIViewController, UITextFieldDelegate{
     
     private let addTitleButton = UIButton()
     private let addTitleLabel = UILabel()
@@ -40,6 +40,13 @@ class EntryView: UIViewController{
         setupAddTagsLabel()
         setupTextArea()
         //setupToolbar()
+        
+        self.titleText.delegate = self
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
     
     

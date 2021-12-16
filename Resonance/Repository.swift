@@ -7,9 +7,11 @@
 //
 
 import Foundation
+import UIKit
 
 class Repository{
     static let shared = Repository()
     
     var selectedDate: Date?
+    var currentVC: UIViewController?
 }

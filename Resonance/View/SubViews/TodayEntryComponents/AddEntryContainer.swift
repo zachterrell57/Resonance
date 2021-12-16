@@ -27,9 +27,9 @@ class AddEntryContainer: UIViewController{
         view.frame = frame
         
         gestureArea.backgroundColor = .clear
-                        
-        loadAddSwipe()
+                      
         loadAddLabel()
+        loadAddSwipe()
         loadEntryContainerView()
     }
     
@@ -61,11 +61,12 @@ class AddEntryContainer: UIViewController{
     }
     
     func loadAddSwipe(){
-        let recognizer = UIPanGestureRecognizer(target: self, action: #selector(gestureFired(_:)))
-        
-        gestureArea.addGestureRecognizer(recognizer)
-        gestureArea.isUserInteractionEnabled = true
-        
+        if  Calendar.current.isDate(Date(), equalTo: Repository.shared.selectedDate!, toGranularity: .day){
+            let recognizer = UIPanGestureRecognizer(target: self, action: #selector(gestureFired(_:)))
+            gestureArea.addGestureRecognizer(recognizer)
+            gestureArea.isUserInteractionEnabled = true
+            addLabel.textColor = .white
+        }
         view.addSubview(gestureArea)
         gestureArea.layer.cornerRadius = 20
         setGestureAreaConstraints()
@@ -84,7 +85,7 @@ class AddEntryContainer: UIViewController{
     func loadAddLabel(){
         addLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         addLabel.text = "Swipe Down to Add New Entry"        
-        addLabel.textColor = .white
+        addLabel.textColor = .lightText
         addLabel.textAlignment = .center
         view.addSubview(addLabel)
                 

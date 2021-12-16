@@ -68,14 +68,20 @@ class TopNavigation: UIViewController{
     }        
     
     @objc func todayButtonPressed(sender: UIButton!){
-        
+        let todayViewController = TodayViewController()
+        todayViewController.modalPresentationStyle = .fullScreen
+        present(todayViewController, animated: true)
     }
     
     @objc func calendarButtonPressed(sender: UIButton!){
-        
+        let calendarViewController = CalendarViewController()
+        calendarViewController.modalPresentationStyle = .fullScreen
+        present(calendarViewController, animated: true)
     }
     
     @objc func archiveButtonPressed(sender: UIButton!){
-        
+        let archiveViewController = ArchiveViewController()
+        archiveViewController.modalPresentationStyle = .fullScreen
+        present(archiveViewController, animated: true)
     }
 }

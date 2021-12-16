@@ -11,7 +11,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 
-class LoginViewController: UIViewController{
+class LoginViewController: UIViewController, UITextFieldDelegate{
     
     var ref: DatabaseReference!
     
@@ -35,10 +35,18 @@ class LoginViewController: UIViewController{
         loadEmailLabel()
         loadSignInButton()
         loadCreateAccountButton()
+        
+        self.emailField.delegate = self
+        self.passwordField.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         ref = Database.database().reference()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
     
     func loadEmailLabel(){
@@ -167,6 +175,13 @@ class LoginViewController: UIViewController{
                 //set number of entries to 0
                 self.ref.child("users").child(createdUser!.uid).child("numberOfEntries").setValue(0)
                 
+                let date = Date()
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MM-dd-yyyy HH:mm:ss:mm"
+                //mark review set as expired
+                self.ref.child("users").child(createdUser!.uid)
+                    .child("currentReviewSet").child("expiration")
+                    .setValue(dateFormatter.string(from: date))
                 self.dismiss(animated: true)
             }
             else{
@@ -181,7 +196,7 @@ class LoginViewController: UIViewController{
     }
     
     func setEmailFieldConstraints(){
-        emailField.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: view.frame.height/2.5, left: 0, bottom: 0, right: 0), size: .init(width: (emailField.frame.width), height: (emailField.frame.height)))
+        emailField.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: view.frame.height/3, left: 0, bottom: 0, right: 0), size: .init(width: (emailField.frame.width), height: (emailField.frame.height)))
         NSLayoutConstraint.activate([
             emailField.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])

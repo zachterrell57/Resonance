@@ -1,9 +1,9 @@
 //
-//  NotesOnDate.swift
+//  Archive.swift
 //  Resonance
 //
-//  Created by Zach Terrell on 8/17/20.
-//  Copyright © 2020 Zach Terrell. All rights reserved.
+//  Created by Zach Terrell on 12/16/21.
+//  Copyright © 2021 Zach Terrell. All rights reserved.
 //
 
 import Foundation
@@ -11,21 +11,21 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 
-class EntriesOnDay: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
-    
+class ArchiveViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+ 
     var ref: DatabaseReference!
     
-    //array storing the entries from today
-    var entriesOnDay = [Entry]()
+    let user = Auth.auth().currentUser
     
-    let cellID: String = "cellId"
-    let headerID: String = "headerID"
+    var allEntries = [Entry]()
+    
+    let topNavigation = TopNavigation()
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         
         //margins on collectionview
-        layout.sectionInset = UIEdgeInsets(top: 5, left: 20, bottom: 0, right: 20)
+        layout.sectionInset = UIEdgeInsets(top: 13, left: 20, bottom: 0, right: 20)
         
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.register(CustomCellSmall.self, forCellWithReuseIdentifier: CustomCellSmall.identifier)
@@ -35,11 +35,22 @@ class EntriesOnDay: UIViewController, UICollectionViewDelegate, UICollectionView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = .white
+        
+        self.loadTopNavigation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        //reloads data everytime view appears
         retrieveData()
+    }
+    
+    func loadTopNavigation(){
+        addChild(topNavigation)
+        view.addSubview(topNavigation.view)
+        topNavigation.didMove(toParent: self)
+        
+        setTopNavigationConstraints()
     }
     
     func retrieveData(){
@@ -53,7 +64,7 @@ class EntriesOnDay: UIViewController, UICollectionViewDelegate, UICollectionView
             self.ref.observe(.value, with: { (snapshot) in
                 
                 //reset entriesOnDay
-                self.entriesOnDay.removeAll()                
+                self.allEntries.removeAll()
                 //for every entry
                 for child in snapshot.children{
                     let entry = child as! DataSnapshot
@@ -61,22 +72,13 @@ class EntriesOnDay: UIViewController, UICollectionViewDelegate, UICollectionView
                         let uid =  entry.key
                         let title = entryFields["title"] as? String ?? ""
                         let text = entryFields["text"] as? String ?? ""
-                        
-                        //save current date as Date type
-                        let dateFormatter = DateFormatter()
-                        dateFormatter.dateFormat = "MM-dd-yyyy HH:mm:ss:mm"
-                        dateFormatter.timeZone = TimeZone.current
-                        let uidAsDate = dateFormatter.date(from: uid)
-                        
-                        //check if current date and note date are equal
-                        if Calendar.current.isDate(uidAsDate!, equalTo: Repository.shared.selectedDate!, toGranularity: .day){
-                            //add to entriesOnDay
-                            self.entriesOnDay.append(.init(
-                                uid: uid,
-                                title: title,
-                                text: text
-                            ))
-                        }
+                                              
+                        //add to entriesOnDay
+                        self.allEntries.append(.init(
+                            uid: uid,
+                            title: title,
+                            text: text
+                        ))
                     }
                 }
                 
@@ -91,16 +93,15 @@ class EntriesOnDay: UIViewController, UICollectionViewDelegate, UICollectionView
             
         }
     }
-        
-    //MARK: Collectionview Section
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return entriesOnDay.count    
+        return allEntries.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 170, height: 170)
-    }     
-
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat{
         return 30
@@ -112,23 +113,31 @@ class EntriesOnDay: UIViewController, UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let entry = entriesOnDay[indexPath.row]
+        let entry = allEntries[indexPath.row]
         let reviewEntryViewController = ReviewEntryViewController()
         reviewEntryViewController.titleText.text = entry.title
         reviewEntryViewController.textArea.text = entry.text
         present(reviewEntryViewController, animated: true)
     }
-        
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCellSmall.identifier, for: indexPath) as! CustomCellSmall
-        let title = entriesOnDay[indexPath.row].title
-        let cellText = entriesOnDay[indexPath.row].text
+        let title = allEntries[indexPath.row].title
+        let cellText = allEntries[indexPath.row].text
         cell.configure(label: title, text: cellText)
         return cell
     }
     
+    func setTopNavigationConstraints(){
+        let topPadding = CGFloat(50)
+        let leftPadding = CGFloat(34)
+        let bottomPadding = CGFloat(0)
+        let rightPadding = CGFloat(-34)
+        topNavigation.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: topPadding, left: leftPadding, bottom: bottomPadding, right: rightPadding), size: .init(width: 346, height: 40))
+    }
+    
     func setCollectionViewConstraints(){
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor)
+        collectionView.anchor(top: topNavigation.view.bottomAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor)
     }
 }

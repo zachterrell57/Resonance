@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Firebase
 import FirebaseDatabase
 import FirebaseAuth
 
@@ -17,12 +18,11 @@ class TodayViewController: UIViewController, UICollectionViewDelegate, UICollect
     
     let user = Auth.auth().currentUser
     
+    var allEntries = [Entry]()
+    
     var reviewSet = [Entry]()
     
     let topNavigation = TopNavigation()
-    
-    let cellID: String = "cellId"
-    let headerID: String = "headerID"
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -31,84 +31,101 @@ class TodayViewController: UIViewController, UICollectionViewDelegate, UICollect
         layout.sectionInset = UIEdgeInsets(top: 13, left: 20, bottom: 0, right: 20)
         
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.register(CustomCellLarge.self, forCellWithReuseIdentifier: "cell")
+        cv.register(CustomCellLarge.self, forCellWithReuseIdentifier: CustomCellLarge.identifier)
         
         return cv
     }()
     
     override func viewDidLoad() {
-        print(user)
+        self.loadTopNavigation()
+        
         if(!(user == nil)){
-            //user = FirebaseAuth.Auth.auth().currentUser
-            ref = Database.database().reference().child("users/" + user!.uid + "/")
+            ref = Database.database().reference().child("users/" + user!.uid)
         }
         
         self.view.backgroundColor = .white
-        
-        self.loadTopNavigation()
+        DispatchQueue.main.async {
+            self.loadReviewSet()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool){
-        loadReviewSet()
+        
     }
     
     func loadReviewSet(){
-        print("in load Review set")
+        ref.removeAllObservers()
         ref.observe(.value, with:  { (snapshot) in
-            print("in observe")
-            if snapshot.hasChild("currentReviewSet"){
-                for child in snapshot.children{
-                    let currentReviewSet = child as! DataSnapshot
-                    if let reviewSetProperties = currentReviewSet.value as? [String: Any]{
-                        let numberOfEntries = reviewSetProperties["numberOfEntries"] as? Int ?? 0
-                        if numberOfEntries < 5{
-                            print("Less than 5")
-                        }
+            if snapshot.hasChild("/currentReviewSet/"){
+                let currentReviewSet = snapshot.childSnapshot(forPath: "currentReviewSet")
+                if let reviewSetProperties = currentReviewSet.value as? [String: Any]{
+                    
+                    //get expiration date from datebase
+                    let expiration = reviewSetProperties["expiration"] as? String ?? ""
+                     
+                    //convert expiration to Date()
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "MM-dd-yyyy HH:mm:ss:mm"
+                    dateFormatter.timeZone = TimeZone.current
+                    let expirationAsDate = dateFormatter.date(from: expiration)
+                    
+                    //check if current time is before expiration
+                    if Date() < expirationAsDate!{
+                        //load entries
+                        self.loadCollectionView()
+                    }
+                    else{
+                        //need a new review set
+                        self.getNewReviewSet(snapshot: snapshot)
                     }
                 }
+                
             }
             else{
-               // getNewReviewSet()
+                //probably a new user, so needs a new review set
+                self.getNewReviewSet(snapshot: snapshot)
             }
         })
     }
     
-    func getNewReviewSet(){
-        //reference to user's entries in database
-        let databaseRef = ref.child("entries/")
-            //opens up observer to path
-            self.ref.observe(.value, with: { (snapshot) in
-                //for every entry
-                for child in snapshot.children{
-                    let entry = child as! DataSnapshot
-                    if let entryFields = entry.value as? [String: Any]{
-                        let uid =  entry.key
-                        let title = entryFields["title"] as? String ?? ""
-                        let text = entryFields["text"] as? String ?? ""
-                        
-                        //save current date as Date type
-                        let dateFormatter = DateFormatter()
-                        dateFormatter.dateFormat = "MM-dd-yyyy HH:mm:ss:mm"
-                        dateFormatter.timeZone = TimeZone.current
-                        let uidAsDate = dateFormatter.date(from: uid)
-                        
-                        self.reviewSet.append(.init(
-                            uid: uid,
-                            title: title,
-                            text: text
-                        ))
-                    }
-                }
-                
-                self.view.addSubview(self.collectionView)
-                self.collectionView.dataSource = self
-                self.collectionView.delegate = self
-                self.collectionView.backgroundColor = .white
-                self.collectionView.reloadData()
-                
-                self.setCollectionViewConstraints()
-            })
+    func getNewReviewSet(snapshot: DataSnapshot){
+        allEntries.removeAll()
+        let child = snapshot.childSnapshot(forPath: "entries")
+        for child in child.children{
+            let entry = child as! DataSnapshot            
+            if let entryFields = entry.value as? [String: Any]{
+                let uid = entry.key
+                let title = entryFields["title"] as? String ?? ""
+                let text = entryFields["text"] as? String ?? ""
+
+                self.allEntries.append(.init(
+                    uid: uid,
+                    title: title,
+                    text: text
+                ))
+            }
         }
+        if allEntries.count <= 5{
+            for entry in allEntries{
+                reviewSet.append(entry)
+            }
+            setNewExpiration()
+        }
+        else{
+            reviewSet = allEntries[randomPick: 5]
+            setNewExpiration()
+        }
+        loadCollectionView()
+    }
+    
+    func setNewExpiration(){
+        let userref = Database.database().reference().child("users/" + user!.uid)
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.dateFormat = "MM-dd-yyyy HH:mm:ss:mm"
+        userref.child("currentReviewSet").child("expiration")
+            .setValue(dateFormatter.string(from: Date().addingTimeInterval(60*5)))
+    }
     
     func loadTopNavigation(){
         addChild(topNavigation)
@@ -118,8 +135,18 @@ class TodayViewController: UIViewController, UICollectionViewDelegate, UICollect
         setTopNavigationConstraints()
     }
     
+    func loadCollectionView(){
+        self.view.addSubview(self.collectionView)
+        self.collectionView.dataSource = self
+        self.collectionView.delegate = self
+        self.collectionView.backgroundColor = .white
+        self.collectionView.reloadData()
+        
+        self.setCollectionViewConstraints()
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        5
+        reviewSet.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -127,8 +154,20 @@ class TodayViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CustomCellLarge
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCellLarge.identifier, for: indexPath) as! CustomCellLarge
+        let title = reviewSet[indexPath.row].title
+        let createdOn = reviewSet[indexPath.row].uid
+        let cellText = reviewSet[indexPath.row].text
+        cell.configure(label: title, createdOn: createdOn, text: cellText)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let entry = reviewSet[indexPath.row]
+        let reviewEntryViewController = ReviewEntryViewController()
+        reviewEntryViewController.titleText.text = entry.title
+        reviewEntryViewController.textArea.text = entry.text
+        present(reviewEntryViewController, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
@@ -157,5 +196,16 @@ class TodayViewController: UIViewController, UICollectionViewDelegate, UICollect
     func setCollectionViewConstraints(){
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.anchor(top: topNavigation.view.bottomAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0))
+    }
+}
+
+extension Array{
+    /// Picks `n` random elements (partial Fisher-Yates shuffle approach)
+    subscript (randomPick n: Int) -> [Element] {
+        var copy = self
+        for i in stride(from: count - 1, to: count - n - 1, by: -1) {
+            copy.swapAt(i, Int(arc4random_uniform(UInt32(i + 1))))
+        }
+        return Array(copy.suffix(n))
     }
 }

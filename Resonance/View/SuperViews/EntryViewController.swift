@@ -16,7 +16,7 @@ class EntryViewController: UIViewController, UIAdaptivePresentationControllerDel
     var ref: DatabaseReference!
     var user: String!
 
-    var entryView: EntryView!
+    var newEntry: NewEntryViewController!
     
     let addLabel = UILabel()
     let gestureArea = UIView()
@@ -26,7 +26,7 @@ class EntryViewController: UIViewController, UIAdaptivePresentationControllerDel
         
         ref = Database.database().reference()
         user = FirebaseAuth.Auth.auth().currentUser!.uid
-        entryView = EntryView()
+        newEntry = NewEntryViewController()
         
         self.view.backgroundColor = #colorLiteral(red: 0.2349999994, green: 0.8309999704, blue: 0.5609999895, alpha: 1)
         self.view.layer.cornerRadius = 20
@@ -46,9 +46,9 @@ class EntryViewController: UIViewController, UIAdaptivePresentationControllerDel
             
         }
         else if gesture.state == .changed{
-            let translation = gesture.translation(in: entryView.view)
+            let translation = gesture.translation(in: newEntry.view)
             if(translation.y < 0){
-                entryView.view.transform = CGAffineTransform(translationX: 0, y: translation.y)
+                newEntry.view.transform = CGAffineTransform(translationX: 0, y: translation.y)
             }
             
             if(translation.y <= -200){
@@ -65,7 +65,7 @@ class EntryViewController: UIViewController, UIAdaptivePresentationControllerDel
         }
         else if gesture.state == .ended{
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.1, options: .curveEaseIn, animations:  {
-                self.entryView.view.transform = .identity
+                self.newEntry.view.transform = .identity
             })
         }
     }
@@ -86,7 +86,7 @@ class EntryViewController: UIViewController, UIAdaptivePresentationControllerDel
 
         //if user doesn't enter title, title becomes current date
         var title: String!
-        if ((entryView.titleText.text) == ""){
+        if ((newEntry.titleText.text) == ""){
             let date = Date()
             let dateFormatter = DateFormatter()
             dateFormatter.timeZone = TimeZone.current
@@ -94,11 +94,11 @@ class EntryViewController: UIViewController, UIAdaptivePresentationControllerDel
             title = dateFormatter.string(from: date)
         }
         else{
-            title = entryView.titleText.text
+            title = newEntry.titleText.text
         }
         
         //save entry text
-        guard let text = entryView.textArea.text else {return}
+        guard let text = newEntry.textArea.text else {return}
         
         //path to number of entries
         let userPath = self.ref.child("users/" + self.user + "/numberOfEntries")
@@ -124,9 +124,9 @@ class EntryViewController: UIViewController, UIAdaptivePresentationControllerDel
     }
     
     func loadEntryView(){
-        addChild(entryView)
-        view.addSubview(entryView.view)
-        entryView.didMove(toParent: self)
+        addChild(newEntry)
+        view.addSubview(newEntry.view)
+        newEntry.didMove(toParent: self)
         setEntryViewConstraints()
     }
     
@@ -143,11 +143,11 @@ class EntryViewController: UIViewController, UIAdaptivePresentationControllerDel
     //MARK: Constraints
     
     func setGestureAreaConstraints(){
-        gestureArea.anchor(top: entryView.view.bottomAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .zero, size: .zero)
+        gestureArea.anchor(top: newEntry.view.bottomAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .zero, size: .zero)
     }
     
     func setEntryViewConstraints(){
-        entryView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .zero, size: .init(width: entryView.view.frame.width, height: entryView.view.frame.height))
+        newEntry.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .zero, size: .init(width: newEntry.view.frame.width, height: newEntry.view.frame.height))
     }
 }
 

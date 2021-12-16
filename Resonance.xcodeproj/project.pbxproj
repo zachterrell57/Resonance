@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2E2023312589CF2E00CD5ACF /* AddEntryContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2023302589CF2E00CD5ACF /* AddEntryContainer.swift */; };
-		2E202335258AF02800CD5ACF /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E202334258AF02800CD5ACF /* EntryView.swift */; };
+		2E202335258AF02800CD5ACF /* NewEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E202334258AF02800CD5ACF /* NewEntryViewController.swift */; };
 		2E20BB4624EB860C00977412 /* EntriesOnDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E20BB4524EB860C00977412 /* EntriesOnDay.swift */; };
 		2E313CBB24C3797900E2674C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E313CBA24C3797900E2674C /* AppDelegate.swift */; };
 		2E313CBD24C3797900E2674C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E313CBC24C3797900E2674C /* SceneDelegate.swift */; };
@@ -26,6 +26,8 @@
 		2ED6828225201383008E9017 /* DayOfWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED6828125201383008E9017 /* DayOfWeekView.swift */; };
 		2ED95C9224C767ED003C598B /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED95C9124C767ED003C598B /* CalendarViewController.swift */; };
 		2EDD26F124ECAE4400653193 /* CustomCellSmall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDD26F024ECAE4400653193 /* CustomCellSmall.swift */; };
+		2EE6CD9C276BC17A00889621 /* ArchiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE6CD9B276BC17A00889621 /* ArchiveViewController.swift */; };
+		2EE6CD9E276BCE8500889621 /* ReviewEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE6CD9D276BCE8500889621 /* ReviewEntryViewController.swift */; };
 		2EEA797D2766C2870042226B /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EEA797C2766C2870042226B /* Entry.swift */; };
 		2EEA797F276A70D90042226B /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EEA797E276A70D90042226B /* Repository.swift */; };
 		2EEA7981276A848E0042226B /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EEA7980276A848E0042226B /* TodayViewController.swift */; };
@@ -37,7 +39,7 @@
 
 /* Begin PBXFileReference section */
 		2E2023302589CF2E00CD5ACF /* AddEntryContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEntryContainer.swift; sourceTree = "<group>"; };
-		2E202334258AF02800CD5ACF /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EntryView.swift; path = Resonance/View/SubViews/EntryComponents/EntryView.swift; sourceTree = SOURCE_ROOT; };
+		2E202334258AF02800CD5ACF /* NewEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NewEntryViewController.swift; path = Resonance/View/SubViews/EntryComponents/NewEntryViewController.swift; sourceTree = SOURCE_ROOT; };
 		2E20BB4524EB860C00977412 /* EntriesOnDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesOnDay.swift; sourceTree = "<group>"; };
 		2E313CB724C3797900E2674C /* Resonance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Resonance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E313CBA24C3797900E2674C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +59,8 @@
 		2ED6828125201383008E9017 /* DayOfWeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekView.swift; sourceTree = "<group>"; };
 		2ED95C9124C767ED003C598B /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		2EDD26F024ECAE4400653193 /* CustomCellSmall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCellSmall.swift; sourceTree = "<group>"; };
+		2EE6CD9B276BC17A00889621 /* ArchiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveViewController.swift; sourceTree = "<group>"; };
+		2EE6CD9D276BCE8500889621 /* ReviewEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewEntryViewController.swift; sourceTree = "<group>"; };
 		2EEA797C2766C2870042226B /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		2EEA797E276A70D90042226B /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		2EEA7980276A848E0042226B /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
@@ -102,10 +106,12 @@
 		2E20BB4324E3CE2200977412 /* SuperViews */ = {
 			isa = PBXGroup;
 			children = (
+				2E4372DC24E08E84007DF32B /* TopNavigation.swift */,
 				2ED95C9124C767ED003C598B /* CalendarViewController.swift */,
 				2EC0088A258EF63D00F4FD8B /* EntryViewController.swift */,
 				2ED24672271DFDE300CF5DF8 /* LoginViewController.swift */,
 				2EEA7980276A848E0042226B /* TodayViewController.swift */,
+				2EE6CD9B276BC17A00889621 /* ArchiveViewController.swift */,
 			);
 			path = SuperViews;
 			sourceTree = "<group>";
@@ -114,7 +120,6 @@
 			isa = PBXGroup;
 			children = (
 				2EEA7982276A8EFB0042226B /* TodayComponents */,
-				2EDD0926258EE25D0054CCC2 /* TopNavigationComponents */,
 				2E20232E2589CEB700CD5ACF /* CalendarComponents */,
 				2EDD0925258EE16D0054CCC2 /* TodayEntryComponents */,
 				2EDD0927258EE2A30054CCC2 /* EntryComponents */,
@@ -195,18 +200,11 @@
 			path = TodayEntryComponents;
 			sourceTree = "<group>";
 		};
-		2EDD0926258EE25D0054CCC2 /* TopNavigationComponents */ = {
-			isa = PBXGroup;
-			children = (
-				2E4372DC24E08E84007DF32B /* TopNavigation.swift */,
-			);
-			path = TopNavigationComponents;
-			sourceTree = "<group>";
-		};
 		2EDD0927258EE2A30054CCC2 /* EntryComponents */ = {
 			isa = PBXGroup;
 			children = (
-				2E202334258AF02800CD5ACF /* EntryView.swift */,
+				2E202334258AF02800CD5ACF /* NewEntryViewController.swift */,
+				2EE6CD9D276BCE8500889621 /* ReviewEntryViewController.swift */,
 			);
 			path = EntryComponents;
 			sourceTree = "<group>";
@@ -360,9 +358,11 @@
 				2EDD26F124ECAE4400653193 /* CustomCellSmall.swift in Sources */,
 				2E4372DD24E08E84007DF32B /* TopNavigation.swift in Sources */,
 				2EEF1DBE2504151900C956A7 /* TodayEntryContainerView.swift in Sources */,
-				2E202335258AF02800CD5ACF /* EntryView.swift in Sources */,
+				2E202335258AF02800CD5ACF /* NewEntryViewController.swift in Sources */,
 				2E4721A725CFA43900A108CE /* EntryToolbar.swift in Sources */,
+				2EE6CD9C276BC17A00889621 /* ArchiveViewController.swift in Sources */,
 				2ED95C9224C767ED003C598B /* CalendarViewController.swift in Sources */,
+				2EE6CD9E276BCE8500889621 /* ReviewEntryViewController.swift in Sources */,
 				2E2023312589CF2E00CD5ACF /* AddEntryContainer.swift in Sources */,
 				2E20BB4624EB860C00977412 /* EntriesOnDay.swift in Sources */,
 			);
