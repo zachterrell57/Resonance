@@ -162,7 +162,10 @@ class LoginViewController: UIViewController{
             if error == nil{
                 let createdUser = result?.user
                 print("account created")
+                //save the users email
                 self.ref.child("users").child(createdUser!.uid).child("email").setValue(createdUser?.email)
+                //set number of entries to 0
+                self.ref.child("users").child(createdUser!.uid).child("numberOfEntries").setValue(0)
                 
                 self.dismiss(animated: true)
             }

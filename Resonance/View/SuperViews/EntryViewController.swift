@@ -100,11 +100,15 @@ class EntryViewController: UIViewController, UIAdaptivePresentationControllerDel
         //save entry text
         guard let text = entryView.textArea.text else {return}
         
-        //database path to save the entries
-        let path = self.ref.child("users/" + self.user + "/entries/" + entryUID)
+        //path to number of entries
+        let userPath = self.ref.child("users/" + self.user + "/numberOfEntries")
+        //update number of entries
+        userPath.setValue(ServerValue.increment(1))
         
+        //path to entries
+        let entryPath = self.ref.child("users/" + self.user + "/entries/" + entryUID)
         //set value of title and text of entry
-        path.setValue(["uid": entryUID, "title": title, "text": text])
+        entryPath.setValue(["uid": entryUID, "title": title, "text": text])
     }
     
     func loadAddSwipe(){

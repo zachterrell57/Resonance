@@ -10,5 +10,6 @@ import Foundation
 
 class Repository{
     static let shared = Repository()
+    
     var selectedDate: Date?
 }

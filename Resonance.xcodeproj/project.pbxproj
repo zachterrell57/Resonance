@@ -29,6 +29,7 @@
 		2EEA797D2766C2870042226B /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EEA797C2766C2870042226B /* Entry.swift */; };
 		2EEA797F276A70D90042226B /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EEA797E276A70D90042226B /* Repository.swift */; };
 		2EEA7981276A848E0042226B /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EEA7980276A848E0042226B /* TodayViewController.swift */; };
+		2EEA7984276A8F150042226B /* CustomCellLarge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EEA7983276A8F150042226B /* CustomCellLarge.swift */; };
 		2EEF1DBC250413FB00C956A7 /* EntriesOnDayHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EEF1DBB250413FB00C956A7 /* EntriesOnDayHeader.swift */; };
 		2EEF1DBE2504151900C956A7 /* TodayEntryContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EEF1DBD2504151900C956A7 /* TodayEntryContainerView.swift */; };
 		DED73D9E5424489CBAF2228A /* Pods_Resonance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34F246A69B4CE65E4CD909F2 /* Pods_Resonance.framework */; };
@@ -59,6 +60,7 @@
 		2EEA797C2766C2870042226B /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		2EEA797E276A70D90042226B /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		2EEA7980276A848E0042226B /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		2EEA7983276A8F150042226B /* CustomCellLarge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCellLarge.swift; sourceTree = "<group>"; };
 		2EEF1DBB250413FB00C956A7 /* EntriesOnDayHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesOnDayHeader.swift; sourceTree = "<group>"; };
 		2EEF1DBD2504151900C956A7 /* TodayEntryContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayEntryContainerView.swift; sourceTree = "<group>"; };
 		34F246A69B4CE65E4CD909F2 /* Pods_Resonance.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Resonance.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,6 +113,7 @@
 		2E20BB4424E3CE2E00977412 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				2EEA7982276A8EFB0042226B /* TodayComponents */,
 				2EDD0926258EE25D0054CCC2 /* TopNavigationComponents */,
 				2E20232E2589CEB700CD5ACF /* CalendarComponents */,
 				2EDD0925258EE16D0054CCC2 /* TodayEntryComponents */,
@@ -206,6 +209,14 @@
 				2E202334258AF02800CD5ACF /* EntryView.swift */,
 			);
 			path = EntryComponents;
+			sourceTree = "<group>";
+		};
+		2EEA7982276A8EFB0042226B /* TodayComponents */ = {
+			isa = PBXGroup;
+			children = (
+				2EEA7983276A8F150042226B /* CustomCellLarge.swift */,
+			);
+			path = TodayComponents;
 			sourceTree = "<group>";
 		};
 		42638222F716B52C5B5E2EB9 /* Pods */ = {
@@ -332,6 +343,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EEA7984276A8F150042226B /* CustomCellLarge.swift in Sources */,
 				2ED24673271DFDE300CF5DF8 /* LoginViewController.swift in Sources */,
 				2EEF1DBC250413FB00C956A7 /* EntriesOnDayHeader.swift in Sources */,
 				2E5017F22504544A00724084 /* DayView.swift in Sources */,

@@ -1,15 +1,15 @@
 //
-//  CustomCellSmall.swift
+//  CustomCellLarge.swift
 //  Resonance
 //
-//  Created by Zach Terrell on 8/18/20.
-//  Copyright © 2020 Zach Terrell. All rights reserved.
+//  Created by Zach Terrell on 12/15/21.
+//  Copyright © 2021 Zach Terrell. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class CustomCellSmall: UICollectionViewCell{
+class CustomCellLarge: UICollectionViewCell{
     
     let titleLabel: UILabel = {
         let label = UILabel()
@@ -32,11 +32,13 @@ class CustomCellSmall: UICollectionViewCell{
     func setupCell(){
         self.backgroundColor = .black
         self.layer.cornerRadius = 20
+        self.layer.masksToBounds = false
         
         layer.shadowRadius = 4.0
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.25
         layer.shadowOffset = CGSize(width: 0, height: 4)
+        
     }
     
     func setupSubViews(){
@@ -49,3 +51,4 @@ class CustomCellSmall: UICollectionViewCell{
         titleLabel.anchor(top: self.topAnchor, leading: self.leadingAnchor, bottom: nil, trailing: nil)
     }
 }
+

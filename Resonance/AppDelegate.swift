@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //deletes session if user has been deleted on dashboard
         let user = Auth.auth().currentUser
+        print("user")
+        print(user)
         user?.getIDTokenForcingRefresh(true, completion: { (idToken, error) in
             if error != nil{
                 do{
